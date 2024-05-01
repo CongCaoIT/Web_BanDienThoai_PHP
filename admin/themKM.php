@@ -11,9 +11,8 @@ if (isset($_POST['btn_Luu'])) {
     $updateKM = $sp->themKhuyenMai($makm, $masp);
 
     if ($updateKM) {
-        // If update is successful, redirect to SanPham.php?ma=1
-        header("Location: SanPham.php?ma=1");
-        exit();
+        echo "<script>window.location.href = 'SanPham.php?ma=1';</script>";
+        exit(); // Đảm bảo không có output nào được gửi trước khi chuyển trang
     }
 }
 ?>
