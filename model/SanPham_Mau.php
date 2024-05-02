@@ -6,7 +6,7 @@ class SanPham_Mau {
     private $soLuongTon;
     private $maMau;
 
-    public function __construct($maSP_Mau, $maSP, $soLuongTon, $maMau) {
+    public function __construct($maSP_Mau=null, $maSP=null, $soLuongTon=null, $maMau=null) {
         $this->maSP_Mau = $maSP_Mau;
         $this->maSP = $maSP;
         $this->soLuongTon = $soLuongTon;

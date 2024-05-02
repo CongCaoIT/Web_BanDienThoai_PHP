@@ -4,7 +4,7 @@ class Mau {
     private $maMau;
     private $tenMau;
 
-    public function __construct($maMau, $tenMau) {
+    public function __construct($maMau=null, $tenMau=null) {
         $this->maMau = $maMau;
         $this->tenMau = $tenMau;
     }
