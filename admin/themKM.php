@@ -11,8 +11,9 @@ if (isset($_POST['btn_Luu'])) {
     $updateKM = $sp->themKhuyenMai($makm, $masp);
 
     if ($updateKM) {
+        echo "<script>alert('Thêm chương trình khuyến mãi thành công!');</script>";
         echo "<script>window.location.href = 'SanPham.php?ma=1';</script>";
-        exit(); // Đảm bảo không có output nào được gửi trước khi chuyển trang
+        exit(); 
     }
 }
 ?>
