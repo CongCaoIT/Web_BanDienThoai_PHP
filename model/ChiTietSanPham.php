@@ -32,12 +32,12 @@ class ChiTietSanPham {
     private $chatLieu;
     private $kichThuoc;
     private $baoHanh;
-    private $ramAt;
+    private $raMat;
 
     public function __construct($maChiTietSP = null, $maSP = null, $kichThuocManHinh = null, $congNgheManHinh = null, $doPhanGiai = null, $tinhNangManHinh = null, $tanSoQuet= null, $cameraSau= null, $quayPhim= null, $cameraTruoc = null,
      $tinhNangCamera = null, $heDieuHanh = null, $chip = null, $tocDoCPU = null, $chipDoHoa = null, $ram = null, $dungLuong = null, $mangDiDong = null, 
      $sim= null, $wifi= null, $congKetNoi= null, $dungLuongPin= null, $loaiPin= null, $hoTroSac= null, $baoMat= null, $tinhNangDacBiet= null, 
-     $khangNuoc= null, $thietKe= null, $chatLieu= null, $kichThuoc= null, $baoHanh= null, $ramAt= null) {
+     $khangNuoc= null, $thietKe= null, $chatLieu= null, $kichThuoc= null, $baoHanh= null, $raMat= null) {
         $this->maChiTietSP = $maChiTietSP;
         $this->maSP = $maSP;
         $this->kichThuocManHinh = $kichThuocManHinh;
@@ -69,7 +69,7 @@ class ChiTietSanPham {
         $this->chatLieu = $chatLieu;
         $this->kichThuoc = $kichThuoc;
         $this->baoHanh = $baoHanh;
-        $this->ramAt = $ramAt;
+        $this->raMat = $raMat;
     }
 
     public function getMaChiTietSP() {
@@ -320,12 +320,12 @@ class ChiTietSanPham {
         $this->baoHanh = $baoHanh;
     }
     
-    public function getRamAt() {
-        return $this->ramAt;
+    public function getRaMat() {
+        return $this->raMat;
     }
     
-    public function setRamAt($ramAt) {
-        $this->ramAt = $ramAt;
+    public function setRaMat($raMat) {
+        $this->raMat = $raMat;
     } 
     
 }

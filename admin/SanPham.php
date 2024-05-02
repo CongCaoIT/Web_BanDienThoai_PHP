@@ -89,6 +89,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 		font-size: 20px;
 	}
 </style>
+
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
@@ -264,10 +265,25 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											?>
 										</td>
 										<td>
-											<button type="button" class="btn btn-primary"><span style="color: #ffffff" class="glyphicon glyphicon-plus"></span></button> <!-- Thêm -->
-											<button type="button" class="btn btn-warning mt-1"><span style="color: #ffffff" class="glyphicon glyphicon-pencil"></span></button> <!-- Sửa -->
-											<button type="button" class="btn btn-danger mt-1"><span style="color: #ffffff" class="glyphicon glyphicon-trash"></span></button> <!-- Xóa -->
-											<button type="button" class="btn btn-info mt-1"><span style="color: #ffffff" class="glyphicon glyphicon-eye-open"></span></button> <!-- Xem -->
+											<!-- Nút "Thêm" -->
+											<a href="duong_dan_toi_trang_them.php" class="btn btn-primary">
+												<span style="color: #ffffff" class="glyphicon glyphicon-plus"></span>
+											</a>
+
+											<!-- Nút "Sửa" -->
+											<a href="duong_dan_toi_trang_sua.php?id=<?php echo $id ?>" class="btn btn-warning mt-1">
+												<span style="color: #ffffff" class="glyphicon glyphicon-pencil"></span>
+											</a>
+
+											<!-- Nút "Xóa" -->
+											<a href="xoa.php?id=<?php echo $id ?>" class="btn btn-danger mt-1">
+												<span style="color: #ffffff" class="glyphicon glyphicon-trash"></span>
+											</a>
+
+											<!-- Nút "Xem" -->
+											<a href="../admin/XemChiTietSanPham.php?ma=<?php echo $sp->getMaSP() ?>" id="showSpecifications" class="btn btn-info mt-1">
+												<span style="color: #ffffff" class="glyphicon glyphicon-eye-open"></span>
+											</a>
 										</td>
 									</tr>
 							<?php
@@ -306,7 +322,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						?>
 					</div>
 				</div>
-
 				<!-- Kết thúc phân trang -->
 			</div>
 
