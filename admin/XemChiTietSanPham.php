@@ -166,13 +166,35 @@ $ctsp = new ChiTietSanPhamAdmin();
                                 <tr class="row-specification">
                                     <td class="col-md-4">Quay phim</td>
                                     <td class="col-md-8">
-                                        <?php echo $ctsp->getQuayPhim() ?>
+                                        <?php
+                                        $str = $ctsp->getQuayPhim();
+                                        $parts = explode(",", $str);
+
+                                        if (end($parts) === '') {
+                                            array_pop($parts);
+                                        }
+
+                                        foreach ($parts as $part) {
+                                            echo $part . "<br>";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr class="row-specification">
                                     <td class="col-md-4">Tính năng</td>
                                     <td class="col-md-8">
-                                        <?php echo $ctsp->getTinhNangCamera() ?>
+                                        <?php
+                                        $str = $ctsp->getTinhNangCamera();
+                                        $parts = explode(",", $str);
+
+                                        if (end($parts) === '') {
+                                            array_pop($parts);
+                                        }
+
+                                        foreach ($parts as $part) {
+                                            echo $part . "<br>";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr class="group-header">
@@ -193,7 +215,18 @@ $ctsp = new ChiTietSanPhamAdmin();
                                 <tr class="row-specification">
                                     <td class="col-md-4">Tốc độ CPU</td>
                                     <td class="col-md-8">
-                                        <?php echo $ctsp->getTocDoCPU() ?>
+                                        <?php
+                                        $str = $ctsp->getTocDoCPU();
+                                        $parts = explode(",", $str);
+
+                                        if (end($parts) === '') {
+                                            array_pop($parts);
+                                        }
+
+                                        foreach ($parts as $part) {
+                                            echo $part . "<br>";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr class="row-specification">
@@ -235,7 +268,18 @@ $ctsp = new ChiTietSanPhamAdmin();
                                 <tr class="row-specification">
                                     <td class="col-md-4">Wifi</td>
                                     <td class="col-md-8">
-                                        <?php echo $ctsp->getWifi() ?>
+                                        <?php
+                                        $str = $ctsp->getWifi();
+                                        $parts = explode(",", $str);
+
+                                        if (end($parts) === '') {
+                                            array_pop($parts);
+                                        }
+
+                                        foreach ($parts as $part) {
+                                            echo $part . "<br>";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr class="row-specification">
@@ -277,7 +321,18 @@ $ctsp = new ChiTietSanPhamAdmin();
                                 <tr class="row-specification">
                                     <td class="col-md-4">Tính năng đặc biệt</td>
                                     <td class="col-md-8">
-                                        <?php echo $ctsp->getTinhNangDacBiet() ?>
+                                        <?php
+                                        $str = $ctsp->getTinhNangDacBiet();
+                                        $parts = explode(",", $str);
+
+                                        if (end($parts) === '') {
+                                            array_pop($parts);
+                                        }
+
+                                        foreach ($parts as $part) {
+                                            echo $part . "<br>";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr class="row-specification">
@@ -316,7 +371,12 @@ $ctsp = new ChiTietSanPhamAdmin();
                                 <tr class="row-specification">
                                     <td class="col-md-4">Thời điểm ra mắt</td>
                                     <td class="col-md-8">
-                                        <div><?php echo $ctsp->getRaMat() ?></div>
+                                        <?php
+                                        $ngayRaMat = $ctsp->getRaMat();
+                                        $timestamp = strtotime($ngayRaMat);
+                                        $ngayRaMatFormatted = date("d/m/Y", $timestamp);
+                                        echo $ngayRaMatFormatted;
+                                        ?>
                                     </td>
                                 </tr>
                             <?php
