@@ -2,14 +2,12 @@
 
 class LoaiSanPham {
     private $maLoaiSP;
-    private $maDanhMuc;
     private $tenLoaiSP;
     private $icon;
     private $biDanh;
 
-    public function __construct($maLoaiSP = null, $maDanhMuc = null, $tenLoaiSP = null, $icon = null, $biDanh = null) {
+    public function __construct($maLoaiSP = null, $tenLoaiSP = null, $icon = null, $biDanh = null) {
         $this->maLoaiSP = $maLoaiSP;
-        $this->maDanhMuc = $maDanhMuc;
         $this->tenLoaiSP = $tenLoaiSP;
         $this->icon = $icon;
         $this->biDanh = $biDanh;
@@ -21,14 +19,6 @@ class LoaiSanPham {
 
     public function setMaLoaiSP($maLoaiSP) {
         $this->maLoaiSP = $maLoaiSP;
-    }
-
-    public function getMaDanhMuc() {
-        return $this->maDanhMuc;
-    }
-
-    public function setMaDanhMuc($maDanhMuc) {
-        $this->maDanhMuc = $maDanhMuc;
     }
 
     public function getTenLoaiSP() {

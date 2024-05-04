@@ -125,6 +125,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 								<th>Mô Tả</th>
 								<th>Hình 1</th>
 								<th>Hình 2</th>
+								<th>Số lần mua</th>
 								<th>Mới</th>
 								<th>Đã Xóa</th>
 								<th></th>
@@ -245,7 +246,16 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 										}
 										?>
 
-										<!-- <td><img src="../data/Products/<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px"></td> -->
+										<td>
+											<?php
+											if ($sp->getSoLanMua() == 0) {
+												echo "0";
+											} else {
+												echo $sp->getSoLanMua();
+											}
+											?>
+										</td>
+
 										<td>
 											<?php
 											if ($sp->getMoi() == 1) {

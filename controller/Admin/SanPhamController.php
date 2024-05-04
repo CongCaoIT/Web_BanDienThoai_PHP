@@ -90,7 +90,8 @@ class SanPhamAdmin
     }
 
     public function layTenSPtheoMaSP(int $masp)
-    {        $query = "SELECT `TenSP` FROM `sanpham` WHERE `MaSP` = ?";
+    {
+        $query = "SELECT `TenSP` FROM `sanpham` WHERE `MaSP` = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $masp);
         $stmt->execute();
@@ -153,5 +154,24 @@ class SanPhamAdmin
         $promotionInfo = $result->fetch_assoc();
 
         return $promotionInfo;
+    }
+
+    public function themSanPham(int $mancc, int $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, int $moi, int $daxoa)
+    {
+        // Chuyển ngày thành chuỗi dạng Y-m-d
+        $ngaycapnhat = date('Y-m-d', strtotime($ngaycapnhat));
+
+        $query = "INSERT INTO `sanpham`(`MaNCC`, `MaLoaiSP`, `TenSP`, `NgayCapNhat`, `MoTa`, `HinhAnh`, `HinhAnh2`, `HinhAnh3`, `Moi`, `DaXoa`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        var_dump($mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa);
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iissssssii", $mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
