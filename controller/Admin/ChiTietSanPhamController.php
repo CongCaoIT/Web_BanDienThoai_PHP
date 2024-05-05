@@ -167,19 +167,17 @@ class ChiTietSanPhamAdmin
         }
     }
 
-    public function kiemtraCTSP($masp)
+    public function xoaChiTietSanPham($mactsp)
     {
-        $query = "SELECT * FROM `chitietsanpham` WHERE `MaSP` = ?";
+        $query = "DELETE FROM `chitietsanpham` WHERE `MaChiTietSP` = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $masp);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->bind_param("i", $mactsp);
 
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
+        if ($stmt->execute()) {
             return true;
+        } else {
+            return false;
         }
     }
 }

@@ -168,7 +168,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                             </a>
 
                                             <!-- Nút "Xóa" -->
-                                            <a href="#" class="btn btn-danger mt-1 delete-product" data-masp="">
+                                            <a href="#" class="btn btn-danger mt-1 delete-product" data-masp="<?php echo $ct->getMaChiTietSP() ?>">
                                                 <span style="color: #ffffff" class="glyphicon glyphicon-trash"></span>
                                             </a>
 
@@ -389,7 +389,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                             <?php
                                 }
                             } else {
-                                echo "<tr><td colspan='8'>Không có sản phẩm</td></tr>";
+                                echo "<tr><td>Không có sản phẩm</td></tr>";
                             }
                             ?>
                         </tbody>
@@ -405,18 +405,18 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
                         // Hiển thị nút "prev" nếu không phải trang đầu tiên
                         if ($page > 1) {
-                            echo "<a href='SanPham.php?ma=$maloai&page=" . ($page - 1) . "' class='btn btn-primary mr-1'><<</a>";
+                            echo "<a href='ChiTietSanPham.php?ma=$maloai&page=" . ($page - 1) . "' class='btn btn-primary mr-1'><<</a>";
                         }
 
                         // Hiển thị các trang
                         for ($i = 1; $i <= $totalPages; $i++) {
                             $activeClass = ($i == $page) ? 'active' : '';
-                            echo "<a href='SanPham.php?ma=$maloai&page=$i' class='btn btn-primary $activeClass mr-1'>$i</a>"; // Thêm class margin-right
+                            echo "<a href='ChiTietSanPham.php?ma=$maloai&page=$i' class='btn btn-primary $activeClass mr-1'>$i</a>"; // Thêm class margin-right
                         }
 
                         // Hiển thị nút "next" nếu không phải trang cuối cùng
                         if ($page < $totalPages) {
-                            echo "<a href='SanPham.php?ma=$maloai&page=" . ($page + 1) . "' class='btn btn-primary'>>></a>";
+                            echo "<a href='ChiTietSanPham.php?ma=$maloai&page=" . ($page + 1) . "' class='btn btn-primary'>>></a>";
                         }
                         ?>
                     </div>
@@ -463,6 +463,35 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                     alert('Just a heads-up, events will not work when run locally.');
             }
 
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".delete-product").click(function(e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+
+                if (confirm('Bạn có chắc chắn muốn xóa chi tiết sản phẩm này?')) {
+                    var masp = $(this).data('masp');
+                    $.ajax({
+                        type: 'GET',
+                        url: 'xoaCTSP.php?ma=' + masp,
+                        success: function(response, textStatus, xhr) {
+                            if (xhr.status == 200) {
+                                alert('Xóa sản chi tiết phẩm thành công!');
+                                // Cập nhật giao diện người dùng tại đây nếu cần
+                                window.location.reload();
+                            } else {
+                                alert('Xóa chi tiết sản phẩm thất bại!');
+                            }
+                        },
+                        error: function() {
+                            alert('Có lỗi xảy ra khi xóa chi tiết sản phẩm!');
+                        }
+                    });
+                }
+            });
         });
     </script>
 </section>
