@@ -286,7 +286,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											</a>
 
 											<!-- Nút "Xóa" -->
-											<a href="xoa.php?id=<?php echo $id ?>" class="btn btn-danger mt-1">
+											<a href="#" class="btn btn-danger mt-1 delete-product" data-masp="<?php echo $sp->getMaSP() ?>">
 												<span style="color: #ffffff" class="glyphicon glyphicon-trash"></span>
 											</a>
 
@@ -305,7 +305,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						</tbody>
 					</table>
 				</div>
-
 
 				<!-- Phân trang -->
 				<div class="row mt-2">
@@ -378,6 +377,35 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 					alert('Just a heads-up, events will not work when run locally.');
 			}
 
+		});
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".delete-product").click(function(e) {
+				e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+
+				if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+					var masp = $(this).data('masp');
+					$.ajax({
+						type: 'GET',
+						url: 'xoaSanPham.php?ma=' + masp,
+						success: function(response, textStatus, xhr) {
+							if (xhr.status == 200) {
+								alert('Xóa sản phẩm thành công!');
+								// Cập nhật giao diện người dùng tại đây nếu cần
+								window.location.reload();
+							} else {
+								alert('Xóa sản phẩm thất bại!');
+							}
+						},
+						error: function() {
+							alert('Có lỗi xảy ra khi xóa sản phẩm!');
+						}
+					});
+				}
+			});
 		});
 	</script>
 </section>

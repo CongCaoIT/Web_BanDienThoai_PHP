@@ -17,7 +17,7 @@ class SanPhamAdmin
 
     public function showSanPham(int $maloaisp)
     {
-        $query = "SELECT * FROM `sanpham` WHERE `MaLoaiSP` = ?";
+        $query = "SELECT * FROM `sanpham` WHERE `MaLoaiSP` = ? AND `DaXoa` = 0";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $maloaisp);
         $stmt->execute();
@@ -194,6 +194,20 @@ class SanPhamAdmin
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iissssssiii", $mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa, $masp);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function xoaSanPham($masp)
+    {
+        $query = "UPDATE sanpham SET DaXoa = 1 WHERE MaSP = ?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $masp);
 
         if ($stmt->execute()) {
             return true;
