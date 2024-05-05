@@ -4,12 +4,13 @@ include_once '../model/config/config.php';
 include_once '../model/lib/database.php';
 include '../model/helpers/format.php';
 include '../model/thanhvien.php';
+include_once '../model/MaHoa.php';
 ?>
 <?php
 class adminlogin
 {
     private $db;
-    private $fm; 
+    private $fm;
     private $tv;
 
     public function __construct()
@@ -26,17 +27,18 @@ class adminlogin
         $this->tv->setTaiKhoan(mysqli_real_escape_string($this->db->link, $adminUser));
         $this->tv->setMatKhau(mysqli_real_escape_string($this->db->link, $adminPass));
 
-        if(empty($this->tv->getTaiKhoan()) || empty($this->tv->getMatKhau())){ // người dùng ko nhập tk mk
+        if (empty($this->tv->getTaiKhoan()) || empty($this->tv->getMatKhau())) { // người dùng ko nhập tk mk
             $alert = "Tài khoản và mật khẩu không được để trống";
             return $alert;
-        }else{ // có nhập
-            $$adminUser = $this->tv->getTaiKhoan();
-            $adminPass = $this->tv->getMatKhau();
-            
+        } else { // có nhập
+            $maHoa = new MaHoa(); // Tạo một đối tượng mới của lớp MaHoa
+            $adminUser = $maHoa->ma_hoa_md5($this->tv->getTaiKhoan());
+            $adminPass = $maHoa->ma_hoa_md5($this->tv->getMatKhau()); // Mã hóa mật khẩu sử dụng hàm ma_hoa_md5()
+
             $query = "SELECT * FROM thanhvien WHERE TaiKhoan = '$adminUser' AND MatKhau = '$adminPass' LIMIT 1";
             $result = $this->db->select($query);
 
-            if($result != false){// tức là tk mk đúng
+            if ($result != false) { // tức là tk mk đúng
                 $value = $result->fetch_assoc(); //lấy dữ liệu ra
                 Session::set('adminlogin', true); //đã tồn tại adminlogin này r
                 Session::set('adminId', $value['MaTV']); //adminId (tự do nhập tên)  ---- $value['adminId'] là tên trường trong SQL bắt buộc khớp
@@ -44,10 +46,9 @@ class adminlogin
                 Session::set('adminName', $value['MatKhau']);
 
                 header('Location: ../admin/index.php');
-
-            }else{
+            } else {
                 $alert = "Tài khoản hoặc mật khẩu không đúng";
-            return $alert;
+                return $alert;
             }
         }
     }
