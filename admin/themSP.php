@@ -56,7 +56,7 @@ if (isset($_POST['btn_Luu'])) {
                 <form method="post" enctype="multipart/form-data">
                     <h2 class="text-center"><strong>Sản phẩm mới</strong></h2>
                     <div class="row justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="MaNCC">Nhà cung cấp</label>
                                 <select id="MaNCC" name="MaNCC" class="form-control">

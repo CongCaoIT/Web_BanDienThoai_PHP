@@ -276,7 +276,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 										</td>
 										<td>
 											<!-- Nút "Thêm" -->
-											<a href="themCTSP.php?ma=<>" class="btn btn-primary">
+											<a href="themCTSP.php?ma=<?php echo $sp->getMaSP() ?>" class="btn btn-primary">
 												<span style="color: #ffffff" class="glyphicon glyphicon-plus"></span>
 											</a>
 

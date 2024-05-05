@@ -34,7 +34,6 @@ class ad_ForgotPass
         $query = "UPDATE thanhvien SET MatKhau = '$mk' WHERE Email = '$mail'";
 
         $result = $this->db->update($query);
-
     }
 
     public function guiMailThongBao($recipientEmail)
@@ -72,7 +71,7 @@ class ad_ForgotPass
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    } 
+    }
 
 
     public function ad_ForgotPass($ad_mail)
