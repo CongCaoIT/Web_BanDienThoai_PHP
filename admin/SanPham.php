@@ -108,7 +108,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 				?>
 				<h2 class="text-center mb-2">DANH SÁCH SẢN PHẨM</h2>
 				<button class="btn btn-success mb-2">
-					<a href="ThemCTKhuyenMai.php" style="color: white;">
+					<a href="themSP.php" style="color: white;">
 						<i class="fa fa-plus-circle"></i> THÊM SẢN PHẨM
 					</a>
 				</button>
@@ -281,7 +281,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											</a>
 
 											<!-- Nút "Sửa" -->
-											<a href="duong_dan_toi_trang_sua.php?id=<?php echo $id ?>" class="btn btn-warning mt-1">
+											<a href="suaSP.php?ma=<?php echo $sp->getMaSP() ?>" class="btn btn-warning mt-1">
 												<span style="color: #ffffff" class="glyphicon glyphicon-pencil"></span>
 											</a>
 

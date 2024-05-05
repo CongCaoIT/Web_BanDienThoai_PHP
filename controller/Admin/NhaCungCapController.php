@@ -38,4 +38,26 @@ class NhaCungCapAdmin
         }
         return $dsNCC;
     }
+
+    public function layNhaCungCaptheoMaSP($masp)
+    {
+        $query = "SELECT nhacungcap.MaNCC, nhacungcap.TenNCC FROM `sanpham`, `nhacungcap` WHERE sanpham.MaNCC = nhacungcap.MaNCC AND `MaSP` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $masp);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $dsNCC = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $ncc = new NhaCungCap();
+                $ncc->setMaNCC($row['MaNCC']);
+                $ncc->setTenNCC($row['TenNCC']);
+                $dsNCC[] = $ncc;
+            }
+        } else {
+            return null;
+        }
+        return $dsNCC;
+    }
 }

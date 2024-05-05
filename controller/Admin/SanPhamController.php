@@ -163,10 +163,37 @@ class SanPhamAdmin
 
         $query = "INSERT INTO `sanpham`(`MaNCC`, `MaLoaiSP`, `TenSP`, `NgayCapNhat`, `MoTa`, `HinhAnh`, `HinhAnh2`, `HinhAnh3`, `Moi`, `DaXoa`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        var_dump($mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa);
-
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iissssssii", $mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function suaSanPham(int $mancc, int $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, int $moi, int $daxoa, int $masp)
+    {
+        $ngaycapnhat = date('Y-m-d', strtotime($ngaycapnhat));
+
+        $query = "UPDATE sanpham 
+        SET 
+            MaNCC = ?, 
+            MaLoaiSP = ?, 
+            TenSP = ?, 
+            NgayCapNhat = ?, 
+            MoTa = ?, 
+            HinhAnh = ?, 
+            HinhAnh2 = ?, 
+            HinhAnh3 = ?, 
+            Moi = ?, 
+            DaXoa = ?
+        WHERE 
+            MaSP = ?;";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iissssssiii", $mancc, $maloaisp, $tensp, $ngaycapnhat, $mota, $hinh, $hinh2, $hinh3, $moi, $daxoa, $masp);
 
         if ($stmt->execute()) {
             return true;

@@ -37,4 +37,26 @@ class LoaiSanPhamAdmin
         }
         return $dsLSP;
     }
+
+    public function layLSPtheoMaSP($masp)
+    {
+        $query = "SELECT loaisanpham.MaLoaiSP, loaisanpham.TenLoaiSP FROM `sanpham`, `loaisanpham` WHERE sanpham.MaLoaiSP = loaisanpham.MaLoaiSP AND sanpham.MaSP = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $masp);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $dsLSP = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $lsp = new LoaiSanPham();
+                $lsp->setMaLoaiSP($row['MaLoaiSP']);
+                $lsp->setTenLoaiSP($row['TenLoaiSP']);
+                $dsLSP[] = $lsp;
+            }
+        } else {
+            return null;
+        }
+        return $dsLSP;
+    }
 }
