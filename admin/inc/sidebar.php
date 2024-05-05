@@ -53,11 +53,11 @@
                         <span>Chi Tiết Sản Phẩm</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="#">Iphone</a></li>
-                        <li><a href="#">Oppo</a></li>
-                        <li><a href="#">Vivo</a></li>
-                        <li><a href="#">Samsung</a></li>
-                        <li><a href="#">Xiaomi</a></li>
+                        <li><a href="ChiTietSanPham.php?ma=1">Iphone</a></li>
+                        <li><a href="ChiTietSanPham.php?ma=2">Oppo</a></li>
+                        <li><a href="ChiTietSanPham.php?ma=3">Vivo</a></li>
+                        <li><a href="ChiTietSanPham.php?ma=4">Samsung</a></li>
+                        <li><a href="ChiTietSanPham.php?ma=5">Xiaomi</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
