@@ -1,6 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 
 // Đảm bảo rằng biến $page được khởi tạo
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -28,7 +28,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 					</div>
 					<div class="col-md-5"></div>
 					<div class="col-md-4">
-						<input type="text" class="form-control" style="width: 450px;" placeholder="Tìm tên sản phẩm hoặc tên nhà cung cấp..."> 
+						<input type="text" class="form-control" style="width: 450px;" placeholder="Tìm tên sản phẩm hoặc tên nhà cung cấp...">
 						<div class="input-group-append">
 							<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
 						</div>
@@ -50,8 +50,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
-							include '../controller/phieuNhapController.php';
+							<?php
 							$dh = new phieuNhapController();
 							$dsPhieuNhap = $dh->showDSPhieuNhap();
 

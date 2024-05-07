@@ -1,5 +1,6 @@
 <?php
 include '../model/lib/session.php';
+include '../model/config/config.php';
 include '../model/lib/database.php';
 include '../model/helpers/format.php';
 

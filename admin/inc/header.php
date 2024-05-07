@@ -1,5 +1,5 @@
 <?php
-include '../model/lib/session.php';
+include ('../admin/include_lib.php');
 Session::checkSession();
 ?>
 <!DOCTYPE html>
@@ -260,3 +260,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--search & user info end-->
             </div>
         </header>
+    </section>
+</body>

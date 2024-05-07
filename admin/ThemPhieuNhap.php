@@ -1,10 +1,7 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-
-include '../controller/phieuNhapController.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $pn = new phieuNhapController();
-
 $stt = 1;
 ?>
 

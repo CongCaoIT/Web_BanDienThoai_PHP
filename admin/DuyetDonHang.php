@@ -1,7 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 ?>
 
 <!--main content start-->
@@ -11,7 +10,6 @@ include '../admin/inc/sidebar.php';
             <h3 class="mb-4"><a href="index.php" style="color:black;">Thống kê</a> / Danh sách đơn hàng</h3>
         </div>
         <?php
-        include '../controller/donHang.php';
         $page = isset($_GET['page']) ? $_GET['page'] : 'chuaduyet';
         $dh = new donHang();
         $donHangs = array();

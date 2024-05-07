@@ -1,10 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/CapQuyen.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
+include ('../controller/CapQuyen.php');
 
 $dh = new CapQuyen();
 

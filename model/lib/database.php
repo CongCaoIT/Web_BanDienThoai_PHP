@@ -1,8 +1,6 @@
-<?php
-include '../model/config/config.php';
-?>
 
 <?php
+include('../model/config/config.php');
 class Database
 {
     public $link;
@@ -26,6 +24,8 @@ class Database
             $this->error = "Connection fail: " . $this->link->connect_error;
             return false;
         }
+        $this->link->set_charset("utf8");
+        return true;
     }
 
     // Select or Read data

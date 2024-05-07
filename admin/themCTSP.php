@@ -1,9 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/Admin/ChiTietSanPhamController.php';
-include '../controller/Admin/SanPhamController.php';
-
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $ctsp = new ChiTietSanPhamAdmin();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra nút Lưu đã được nhấn

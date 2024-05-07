@@ -1,10 +1,4 @@
 <?php
-//include '../model/lib/session.php';
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/helpers/format.php';
-include '../model/thanhvien.php';
-
 
 class CapQuyen
 {
@@ -34,7 +28,7 @@ class CapQuyen
             }
         }
         return $completed;
-    } 
+    }
 
     public function getTTThanhVien(int $ma)
     {

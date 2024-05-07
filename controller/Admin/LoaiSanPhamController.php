@@ -1,8 +1,4 @@
 <?php
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/LoaiSanPham.php';
-
 class LoaiSanPhamAdmin
 {
     private $fm;

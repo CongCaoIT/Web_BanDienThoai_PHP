@@ -1,11 +1,4 @@
 <?php
-//include '../model/lib/session.php';
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/helpers/format.php';
-include '../model/DonDatHang.php';
-include '../model/ChiTietDonDatHang.php';
-include '../model/KhuyenMai.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,8 +6,6 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-
-
 class donHang
 {
     private $db;

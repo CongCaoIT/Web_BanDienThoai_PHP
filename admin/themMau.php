@@ -1,9 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/Admin/SanPhamController.php';
-include '../controller/Admin/MauController.php';
-
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $sp = new SanPhamAdmin();
 $mauclass = new MauAdmin();
 if (isset($_POST['btnLuuMau'])) {
@@ -17,8 +14,8 @@ if (isset($_POST['btnLuuMau'])) {
     if ($result1 && $result2) {
         echo "<script>alert('Thêm màu thành công!');</script>";
         echo "<script>window.location.href = 'SanPham.php?ma=1';</script>";
-        exit(); 
-    }else {
+        exit();
+    } else {
         echo "Insert failed!";
     }
 }

@@ -1,10 +1,10 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/Admin/SanPhamController.php';
-include '../controller/Admin/MauController.php';
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$dh = new SanPhamAdmin();
+$mauclass = new MauAdmin();
 ?>
 
 <style>
@@ -133,8 +133,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						</thead>
 						<tbody>
 							<?php
-							$dh = new SanPhamAdmin();
-							$mauclass = new MauAdmin();
+
 							$dsSanPham = $dh->showSanPham($maloai);
 							$recordsPerPage = 7;
 							if (!empty($dsSanPham)) {
@@ -203,7 +202,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											foreach ($dsMau as $index => $mau) {
 										?>
 												<td>
-													<img src="../data/Products/<?php echo ($isFirstColor ? $sp->getHinhAnh() : $sp->getHinhAnh2()) ?>" alt="" width="120px">
+													<img src="..//data//Products//<?php echo ($isFirstColor ? $sp->getHinhAnh() : $sp->getHinhAnh2()) ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;">Màu: <span style="color: red; font-weight: bold;"><?php echo $mau->getTenMau() ?></span></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[$index]->getSoLuongTon() ?></span></p>
@@ -215,13 +214,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											if ($dsSLT != null) {
 											?>
 												<td>
-													<img src="../data/Products/<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
+													<img src="..//data//Products//<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[0]->getSoLuongTon() ?></span></p>
 												</td>
 												<td>
-													<img src="../data/Products/<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
+													<img src="..//data//Products//<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[1]->getSoLuongTon() ?></span></p>
@@ -230,13 +229,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 											} else {
 											?>
 												<td>
-													<img src="../data/Products/<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
+													<img src="..//data//Products//<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;">0</span></p>
 												</td>
 												<td>
-													<img src="../data/Products/<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
+													<img src="..//data//Products//<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;">0</span></p>

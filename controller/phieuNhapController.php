@@ -1,9 +1,4 @@
 <?php
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/helpers/format.php';
-include '../model/ChiTietPhieuNhap.php';
-
 class phieuNhapController
 {
     private $db;
@@ -107,5 +102,4 @@ class phieuNhapController
             return $DSSPResults;
         }
     }
-
 }

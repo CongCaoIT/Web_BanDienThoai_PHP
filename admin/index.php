@@ -1,11 +1,7 @@
 <?php
-include '../model/lib/session.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $onlineUsers = Session::countOnlineUsers();
-?>
-
-<?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
 ?>
 
 <!--main content start-->
@@ -83,7 +79,6 @@ include '../admin/inc/sidebar.php';
 					</thead>
 					<tbody>
 						<?php
-						include '../controller/donHang.php';
 						$dh = new donHang();
 						// Gọi hàm showDonDatHang() để lấy mảng đơn hàng đã hoàn thành
 						$completedOrders = $dh->showDonDatHang();

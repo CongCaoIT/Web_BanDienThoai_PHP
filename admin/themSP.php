@@ -1,9 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/Admin/SanPhamController.php';
-include '../controller/Admin/NhaCungCapController.php';
-include '../controller/Admin/LoaiSanPhamController.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 
 $ncc = new NhaCungCapAdmin();
 $dsNCC = $ncc->layDSNhaCungCap();
@@ -22,7 +19,7 @@ if (isset($_POST['btn_Luu'])) {
     $moi = isset($_POST['Moi']) ? (int)$_POST['Moi'] : 0;
     $daxoa = isset($_POST['DaXoa']) ? (int)$_POST['DaXoa'] : 0;
 
-    $targetDir = "../data/Products/";
+    $targetDir = "..//data//Products//";
 
     $hinh1 = $_FILES['HinhAnh1']['name'];
     $hinh2 = $_FILES['HinhAnh2']['name'];
@@ -85,7 +82,7 @@ if (isset($_POST['btn_Luu'])) {
 
                             <div class="form-group">
                                 <label for="TenSp">Tên sản phẩm</label>
-                                <input type="text" id="TenSp" name="TenSP" class="form-control" placeholder="Tên sản phẩm ...">
+                                <input type="text" id="TenSp" name="TenSP" class="form-control" placeholder="Tên sản phẩm ">
                             </div>
 
                             <div class="form-group">
@@ -95,7 +92,7 @@ if (isset($_POST['btn_Luu'])) {
 
                             <div class="form-group">
                                 <label for="MoTa">Mô tả</label>
-                                <textarea id="MoTa" class="form-control" name="MoTa" placeholder="Mô tả sản phẩm ..."></textarea>
+                                <textarea id="MoTa" class="form-control" name="MoTa" placeholder="Mô tả sản phẩm .../"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -140,7 +137,7 @@ if (isset($_POST['btn_Luu'])) {
 
                 <!-- footer -->
                 <?php
-                include '../admin/inc/footer.php';
+                include '..//admin//inc//footer.php';
                 ?>
                 <!--main content end-->
             </div>

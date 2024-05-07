@@ -1,9 +1,4 @@
 <?php
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/Mau.php';
-include '../model/SanPham_Mau.php';
-
 class MauAdmin
 {
     private $fm;
@@ -18,11 +13,7 @@ class MauAdmin
 
     public function layTenMauSPtheoMaSP(int $masp)
     {
-        $query = "SELECT MAU.TenMau, SANPHAM_MAU.SoLuongTon
-        FROM SANPHAM
-        JOIN SANPHAM_MAU ON SANPHAM.MaSP = SANPHAM_MAU.MaSP
-        JOIN MAU ON SANPHAM_MAU.MaMau = MAU.MaMau
-        WHERE SANPHAM.MaSP = ?";
+        $query = "SELECT mau.TenMau FROM `sanpham` JOIN `sanpham_mau` ON sanpham.MaSP = sanpham_mau.MaSP JOIN `mau` ON sanpham_mau.MaMau = mau.MaMau WHERE sanpham.MaSP = ?;";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $masp);
         $stmt->execute();
@@ -43,10 +34,7 @@ class MauAdmin
 
     public function laySLTSPtheoMaSP(int $masp)
     {
-        $query = "SELECT SANPHAM_MAU.SoLuongTon
-        FROM SANPHAM
-        JOIN SANPHAM_MAU ON SANPHAM.MaSP = SANPHAM_MAU.MaSP
-        WHERE SANPHAM.MaSP = ?";
+        $query = "SELECT sanpham_mau.SoLuongTon FROM `sanpham` JOIN `sanpham_mau` ON sanpham.MaSP = sanpham_mau.MaSP WHERE sanpham.MaSP = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $masp);
         $stmt->execute();

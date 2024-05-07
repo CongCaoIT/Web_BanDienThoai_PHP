@@ -1,10 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/Admin/SanPhamController.php';
-include '../controller/Admin/NhaCungCapController.php';
-include '../controller/Admin/LoaiSanPhamController.php';
-
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $sp = new SanPhamAdmin();
 
 $ncc = new NhaCungCapAdmin();

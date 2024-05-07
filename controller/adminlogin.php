@@ -1,12 +1,10 @@
+
 <?php
 include '../model/lib/session.php';
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
+include '../model/lib/database.php';
 include '../model/helpers/format.php';
 include '../model/thanhvien.php';
-include_once '../model/MaHoa.php';
-?>
-<?php
+include '../model/MaHoa.php';
 class adminlogin
 {
     private $db;
@@ -45,7 +43,7 @@ class adminlogin
                 Session::set('adminUser', $value['TaiKhoan']);
                 Session::set('adminName', $value['MatKhau']);
 
-                header('Location: ../admin/index.php');
+                echo "<script>window.location.href = 'index.php';</script>";
             } else {
                 $alert = "Tài khoản hoặc mật khẩu không đúng";
                 return $alert;

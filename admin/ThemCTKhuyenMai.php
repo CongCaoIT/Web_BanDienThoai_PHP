@@ -1,10 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
-include '../controller/donHang.php';
-?>
-
-<?php
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 $km = new donHang();
 if (isset($_POST['btn_luuCTKM'])) {
     $tenCT = $_POST['tenChuongTrinh'];
@@ -63,8 +59,6 @@ if (isset($_POST['btn_luuCTKM'])) {
                         </div>
                     </form>
                 </div>
-
-
 
                 <!-- footer -->
                 <?php

@@ -1,8 +1,4 @@
 <?php
-include_once '../model/config/config.php';
-include_once '../model/lib/database.php';
-include '../model/SanPham.php';
-
 class SanPhamAdmin
 {
     private $fm;
@@ -132,7 +128,7 @@ class SanPhamAdmin
 
     public function themKhuyenMai(int $makm, int $masp)
     {
-        $query = "UPDATE sanpham SET MaKhuyenMai = ? WHERE MaSP = ?";
+        $query = "UPDATE `sanpham` SET MaKhuyenMai = ? WHERE MaSP = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $makm, $masp);
@@ -146,7 +142,7 @@ class SanPhamAdmin
 
     public function layThongTinKhuyenMaiTheoMa($maKhuyenMai)
     {
-        $query = "SELECT NgayBatDau, NgayKetThuc FROM khuyenmai WHERE MaKhuyenMai = ?";
+        $query = "SELECT NgayBatDau, NgayKetThuc FROM `khuyenmai` WHERE MaKhuyenMai = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $maKhuyenMai);
         $stmt->execute();
@@ -177,7 +173,7 @@ class SanPhamAdmin
     {
         $ngaycapnhat = date('Y-m-d', strtotime($ngaycapnhat));
 
-        $query = "UPDATE sanpham 
+        $query = "UPDATE `sanpham` 
         SET 
             MaNCC = ?, 
             MaLoaiSP = ?, 
@@ -204,7 +200,7 @@ class SanPhamAdmin
 
     public function xoaSanPham($masp)
     {
-        $query = "UPDATE sanpham SET DaXoa = 1 WHERE MaSP = ?";
+        $query = "UPDATE `sanpham` SET DaXoa = 1 WHERE MaSP = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $masp);

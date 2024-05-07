@@ -1,6 +1,6 @@
 <?php
-include '../admin/inc/header.php';
-include '../admin/inc/sidebar.php';
+include ('../admin/inc/header.php');
+include ('../admin/inc/sidebar.php');
 
 // Đảm bảo rằng biến $page được khởi tạo
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -37,7 +37,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						</thead>
 						<tbody>
 							<?php
-							include '../controller/donHang.php';
 							$dh = new donHang();
 							$dsKhuyenMai = $dh->showTTKhuyenMai();
 
