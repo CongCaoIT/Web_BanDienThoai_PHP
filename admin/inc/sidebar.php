@@ -3,11 +3,15 @@
         <!-- sidebar menu start-->
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="index.php">
+                <li class="sub-menu">
+                    <a href="javascript:;">
                         <i class="fa fa-dashboard"></i>
                         <span>Thống Kê</span>
                     </a>
+                    <ul class="sub">
+                        <li><a href="index.php">Thống kê</a></li>
+                        <li><a href="chartjs.php">Biểu đồ</a></li>
+                    </ul>
                 </li>
 
                 <li>
