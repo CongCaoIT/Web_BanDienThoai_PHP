@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 
 $ctsp = new ChiTietSanPhamAdmin();
 $sp = new SanPhamAdmin();
@@ -156,12 +156,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                     <tr>
                                         <td>
                                             <!-- Nút "Thêm" -->
-                                            <a href="themCTSP.php?ma=" class="btn btn-primary">
+                                            <a href="themCTSP.php?ma=<?php echo $ct->getMaSP() ?>" class="btn btn-primary">
                                                 <span style="color: #ffffff" class="glyphicon glyphicon-plus"></span>
                                             </a>
 
                                             <!-- Nút "Sửa" -->
-                                            <a href="suaSP.php?ma=" class="btn btn-warning mt-1">
+                                            <a href="suaCTSP.php?ma=<?php echo $ct->getMaSP() ?>" class="btn btn-warning mt-1">
                                                 <span style="color: #ffffff" class="glyphicon glyphicon-pencil"></span>
                                             </a>
 

@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Kiểm tra và thông báo kết quả
         if ($success) {
             echo "<script>alert('Thêm sản phẩm thành công!');</script>";
-            echo "<script>window.location.href = 'SanPham.php?ma=1';</script>";
+            echo "<script>window.location.href = 'ChiTietSanPham.php?ma=1';</script>";
             exit();
         } else {
             echo "<p>Có lỗi xảy ra khi thêm chi tiết sản phẩm.</p>";
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <section id="main-content">
     <section class="wrapper">
         <div class="market-updates">
-            <h3 class="mb-2"><a href="SanPham.php?ma=1" style="color:black;">Sản phẩm</a> / Thêm sản phẩm</h3>
+            <h3 class="mb-2"><a href="ChiTietSanPham.php?ma=1" style="color:black;">Chi tiết sản phẩm</a> / Thêm</h3>
         </div>
         <!-- Menu ngang -->
         <div class="container-fluid bg-white p-4">
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="ml-2 mt-2" role="alert">
                                     <h3 class="mt-2 mb-3">Sản phẩm đã có thông tin chi tiết.</h3>
                                     <div class="btn-group mb-2" role="group">
-                                        <a href="SanPham.php?ma=1" class="btn btn-danger mr-2">Trở lại</a>
+                                        <a href="ChiTietSanPham.php?ma=1" class="btn btn-danger mr-2">Trở lại</a>
                                         <a href="XemChiTietSanPham.php?ma=<?php echo $_GET['ma'] ?>" class="btn btn-primary">Xem chi tiết</a>
                                     </div>
                                 </div>

@@ -179,6 +179,20 @@ class ChiTietSanPhamAdmin
         }
     }
 
+    public function suaChiTietSanPham(int $masp, $kichthuocmanhinh, $congnghemanhinh, $dophangiai, $tinhnangmanhinh, $tansoquet, $camerasau, $quayphim, $cameratruoc, $tinhnangcamera, $hedieuhanh, $chip, $tocdocpu, $chipdohoa, $ram, $dungluong, $mangdidong, $sim, $wifi, $congketnoi, $dungluongpin, $loaipin, $hotrosac, $baomat, $tinhnangdacbiet, $khangnuoc, $thietke, $chatlieu, $kichthuoc, $baohanh, $ramat, $mactsp)
+    {
+        $query = "UPDATE `chitietsanpham` SET `MaSP`= ?, `KICHTHUOCMANHINH`= ?, `CONGNGHEMANHINH`= ?, `DOPHANGIAI`= ?, `TINHNANGMANGHINH`= ?, `TANSOQUET`= ?, `CAMERASAU`= ?, `QUAYPHIM`= ?, `CAMERATRUOC`= ?, `TINHNANGCAMERA`= ?, `HEDIEUHANH`= ?, `CHIP`= ?, `TOCDOCPU`= ?, `CHIPDOHOA`= ?, `RAM`= ?, `DUNGLUONG`= ?, `MANGDIDONG`= ?, `SIM`= ?, `WIFI`= ?, `CONGKETNOI`= ?, `DUNGLUONGPIN`= ?, `LOAIPIN`= ?, `HOTROSAC`= ?, `BAOMAT`= ?, `TINHNANGDACBIET`= ?, `KHANGNUOC`= ?, `THIETKE`= ?, `CHATLIEU`= ?, `KICHTHUOC`= ?, `BAOHANH`= ?, `RAMAT`= ? WHERE `MaChiTietSP` = ?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("issssssssssssssssssssssssssssssi", $masp, $kichthuocmanhinh, $congnghemanhinh, $dophangiai, $tinhnangmanhinh, $tansoquet, $camerasau, $quayphim, $cameratruoc, $tinhnangcamera, $hedieuhanh, $chip, $tocdocpu, $chipdohoa, $ram, $dungluong, $mangdidong, $sim, $wifi, $congketnoi, $dungluongpin, $loaipin, $hotrosac, $baomat, $tinhnangdacbiet, $khangnuoc, $thietke, $chatlieu, $kichthuoc, $baohanh, $ramat, $mactsp);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function xoaChiTietSanPham($mactsp)
     {
         $query = "DELETE FROM `chitietsanpham` WHERE `MaChiTietSP` = ?";
