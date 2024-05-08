@@ -171,11 +171,9 @@ class donHang
         $result = $this->db->insert($query);
 
         if ($result) {
-            $alert = "<span class='success'>Thêm chương trình khuyến mãi thành công</span>";
-            return $alert;
+            return true;
         } else {
-            $alert = "<span class='error'>Thêm chương trình khuyến mãi thất bại</span>";
-            return $alert;
+            return false;
         }
     }
 

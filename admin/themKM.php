@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 $sp = new SanPhamAdmin();
 if (isset($_POST['btn_Luu'])) {
     $masp = $_GET['ma'];
@@ -39,12 +39,11 @@ if (isset($_POST['btn_Luu'])) {
                                     <label for="PhanTramGiamGia">Chương trình khuyến mãi</label>
                                     <select class="form-control" name="MaKhuyenMai" id="selectKhuyenMai">
                                         <?php
-                                        include '../controller/donHang.php';
                                         $dh = new donHang();
                                         $dsKhuyenMai = $dh->showTTKhuyenMai();
                                         foreach ($dsKhuyenMai as $km) {
                                         ?>
-                                            <option value="<?php echo $km->getMaKhuyenMai() ?>" data-phantramgiamgia="<?php echo $km->getPhanTramGiamGia() ?>"><?php echo $km->getTenKhuyenMai() ?></option>
+                                            <option value="<?php echo $km->getMaKhuyenMai() ?>" data-phantramgiamgia="<?php echo $km->getPhanTramGiamGia() ?>" data-ngaybatdau="<?php echo $km->getNgayBatDau() ?>" data-ngayketthuc="<?php echo $km->getNgayKetThuc() ?>"><?php echo $km->getTenKhuyenMai() ?></option>
                                         <?php
                                         }
                                         ?>
@@ -61,6 +60,33 @@ if (isset($_POST['btn_Luu'])) {
                                             ?>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="">Ngày bắt đầu</label>
+                                        <select class="form-control" name="" id="selectNgayBatDau" disabled>
+                                            <?php
+                                            foreach ($dsKhuyenMai as $km) {
+                                            ?>
+                                                <option value="<?php echo $km->getNgayBatDau() ?>"><?php echo $km->getNgayBatDau() ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Ngày kết thúc</label>
+                                        <select class="form-control" name="PhanTramGiamGia" id="selectNgayKetThuc" disabled>
+                                            <?php
+                                            foreach ($dsKhuyenMai as $km) {
+                                            ?>
+                                                <option value="<?php echo $km->getNgayKetThuc() ?>"><?php echo $km->getNgayKetThuc() ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group" style="margin-top: 12px;">
                                         <a href="SanPham?ma=<?php echo $masp ?>" class="btn btn-danger">Trở lại</a>
                                         <button type="submit" class="btn btn-primary" name="btn_Luu">Lưu</button>
@@ -120,4 +146,30 @@ if (isset($_POST['btn_Luu'])) {
 
         });
     </script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lắng nghe sự kiện khi chọn chương trình khuyến mãi thay đổi
+            document.getElementById('selectKhuyenMai').addEventListener('change', function() {
+                // Lấy giá trị phần trăm giảm giá từ thuộc tính data-phantramgiamgia của tùy chọn đã chọn
+                var selectedOption = this.options[this.selectedIndex];
+                var phanTramGiamGia = selectedOption.getAttribute('data-phantramgiamgia');
+                // Lấy giá trị ngày bắt đầu và kết thúc từ thuộc tính data-ngaybatdau và data-ngayketthuc của tùy chọn đã chọn
+                var ngayBatDau = selectedOption.getAttribute('data-ngaybatdau');
+                var ngayKetThuc = selectedOption.getAttribute('data-ngayketthuc');
+
+                // Cập nhật giá trị phần trăm giảm giá trong phần tử selectPhanTram
+                var selectPhanTram = document.getElementById('selectPhanTram');
+                selectPhanTram.value = phanTramGiamGia;
+
+                // Cập nhật giá trị ngày bắt đầu và kết thúc trong các trường nhập ngày tương ứng
+                var selectNgayBatDau = document.getElementById('selectNgayBatDau');
+                selectNgayBatDau.value = ngayBatDau;
+                var selectNgayKetThuc = document.getElementById('selectNgayKetThuc');
+                selectNgayKetThuc.value = ngayKetThuc;
+            });
+        });
+    </script>
+
+
 </section>

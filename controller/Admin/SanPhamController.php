@@ -211,4 +211,18 @@ class SanPhamAdmin
             return false;
         }
     }
+
+    public function updateGiaSanPham($mapn)
+    {
+        $query = "UPDATE sanpham, chitietphieunhap SET sanpham.DonGia = (chitietphieunhap.DonGiaNhap * 1.5) WHERE sanpham.MaSP = chitietphieunhap.MaSP AND chitietphieunhap.MaPN = ?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $mapn);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

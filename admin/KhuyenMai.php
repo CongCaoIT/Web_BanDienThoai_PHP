@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 
 // Đảm bảo rằng biến $page được khởi tạo
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -40,7 +40,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 							$dh = new donHang();
 							$dsKhuyenMai = $dh->showTTKhuyenMai();
 
-							$recordsPerPage = 2;
+							$recordsPerPage = 10;
 							if (!empty($dsKhuyenMai)) {
 								$startIndex = ($page - 1) * $recordsPerPage;
 								$endIndex = min($startIndex + $recordsPerPage - 1, count($dsKhuyenMai) - 1);
@@ -75,18 +75,18 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 						// Hiển thị nút "prev" nếu không phải trang đầu tiên
 						if ($page > 1) {
-							echo "<a href='KhuyenMai.php?page=" . ($page - 1) . "' class='btn btn-primary'>Prev</a>";
+							echo "<a href='KhuyenMai.php?page=" . ($page - 1) . "' class='btn btn-primary mr-1'><<</a>";
 						}
 
 						// Hiển thị các trang
 						for ($i = 1; $i <= $totalPages; $i++) {
 							$activeClass = ($i == $page) ? 'active' : '';
-							echo "<a href='KhuyenMai.php?page=$i' class='btn btn-primary $activeClass'>$i</a>";
+							echo "<a href='KhuyenMai.php?page=$i' class='btn btn-primary mr-1 $activeClass'>$i</a>";
 						}
 
 						// Hiển thị nút "next" nếu không phải trang cuối cùng
 						if ($page < $totalPages) {
-							echo "<a href='KhuyenMai.php?page=" . ($page + 1) . "' class='btn btn-primary'>Next</a>";
+							echo "<a href='KhuyenMai.php?page=" . ($page + 1) . "' class='btn btn-primary mr-1'>>></a>";
 						}
 						?>
 					</div>

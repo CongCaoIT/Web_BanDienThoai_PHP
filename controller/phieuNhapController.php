@@ -36,7 +36,7 @@ class phieuNhapController
 
     public function showTenNCC()
     {
-        $query = "SELECT MaNCC, TenNCC FROM nhacungcap ";
+        $query = "SELECT MaNCC, TenNCC FROM nhacungcap";
         $result = $this->db->select($query);
 
         $dsNCC = array();
@@ -54,27 +54,6 @@ class phieuNhapController
         }
         return $dsNCC;
     }
-
-    /* public function getMaNCC($tenCC)
-    {
-        $sp = new ChiTietPhieuNhap();
-        $this->fm->validation($tenCC);
-
-        $sp->ncc->setTenNCC($tenCC);
-
-        $tenCC = $sp->ncc->getTenNCC();
-
-        $query = "SELECT MaNCC FROM nhacungcap WHERE TenNCC = '$tenCC' LIMIT 1";
-        $result = $this->db->select($query);
-
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            return $row['MaNCC'];
-        } else {
-            return false;
-        }
-    } */
-
 
     public function getTenSP($maNCC)
     {
@@ -100,6 +79,41 @@ class phieuNhapController
                 }
             }
             return $DSSPResults;
+        }
+    }
+
+    public function themPN($maNCC, $ngaynhap)
+    {
+        $ngaynhap = date('Y-m-d', strtotime($ngaynhap));
+
+        $query = "INSERT INTO `phieunhap`(`MaNCC`, `NgayNhap`, `DaXoa`) VALUES (?, ?, 0)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("is", $maNCC, $ngaynhap);
+
+        if ($stmt->execute()) {
+            // Lấy mã phiếu nhập vừa thêm vào
+            $maPN = $stmt->insert_id;
+
+            // Đóng kết nối và trả về mã phiếu nhập
+            $stmt->close();
+            return $maPN;
+        } else {
+            return false;
+        }
+    }
+
+    public function themCTPN($maPN, $maSP, $maMau1, $maMau2, $dongianhap, $sl1, $sl2)
+    {
+        $query = "INSERT INTO `chitietphieunhap`(`MaPN`, `MaSP`, `MaMau1`, `MaMau2`, `DonGiaNhap`, `SoLuongNhapMau1`, `SoLuongNhapMau2`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iiiisii", $maPN, $maSP, $maMau1, $maMau2, $dongianhap, $sl1, $sl2);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

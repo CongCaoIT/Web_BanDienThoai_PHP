@@ -143,7 +143,6 @@ $mauclass = new MauAdmin();
 								for ($i = $startIndex; $i <= $endIndex; $i++) {
 									$sp = $dsSanPham[$i];
 									$phantramkhuyenmai = $dh->layKhuyenMaitheoMaSP($sp->getMaSP());
-									$giahientai = $sp->getDonGia() - ($sp->getDonGia() * $phantramkhuyenmai / 100);
 
 									$dsMau = $mauclass->layTenMauSPtheoMaSP($sp->getMaSP());
 									$dsSLT = $mauclass->laySLTSPtheoMaSP($sp->getMaSP());
@@ -153,6 +152,12 @@ $mauclass = new MauAdmin();
 										$promotionInfo = $dh->layThongTinKhuyenMaiTheoMa($sp->getMaKhuyenMai());
 										$ngayBatDau = $promotionInfo['NgayBatDau'];
 										$ngayKetThuc = $promotionInfo['NgayKetThuc'];
+
+										if ($phantramkhuyenmai != null && date('Y-m-d') >= $ngayBatDau && date('Y-m-d') <= $ngayKetThuc) {
+											$giahientai = $sp->getDonGia() - ($sp->getDonGia() * $phantramkhuyenmai / 100);
+										} else {
+											$giahientai = $sp->getDonGia();
+										}
 									}
 							?>
 									<tr>
@@ -160,15 +165,33 @@ $mauclass = new MauAdmin();
 										<td style="text-align: left;"><?php echo $sp->getTenSP(); ?></td>
 										<td>
 											<?php
-											echo number_format($sp->getDonGia(), 0, ',', '.') . '₫';
+											if ($sp->getDonGia() == null) {
+											?>
+												<a href="themPN.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm phiếu nhập</a>
+											<?php
+											} else {
+												echo number_format($sp->getDonGia(), 0, ',', '.') . '₫';
+											}
 											?>
 										</td>
 										<td style="color: red;">
-											<strong>
-												<?php
-												echo number_format($giahientai, 0, ',', '.') . '₫';
-												?>
-											</strong>
+
+											<?php
+											if ($sp->getDonGia() == null) {
+											?>
+												<a href="themPN.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm phiếu nhập</a>
+											<?php
+											} else {
+											?>
+												<strong>
+													<?php
+													echo number_format($giahientai, 0, ',', '.') . '₫';
+													?>
+												</strong>
+											<?php
+											}
+											?>
+
 										</td>
 										<td>
 											<?php

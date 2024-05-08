@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 $km = new donHang();
 if (isset($_POST['btn_luuCTKM'])) {
     $tenCT = $_POST['tenChuongTrinh'];
@@ -10,6 +10,12 @@ if (isset($_POST['btn_luuCTKM'])) {
     $ngayKT = $_POST['ngayKetThuc'];
 
     $insertCTKM = $km->insertCTKM($tenCT, $mt, $giam, $ngayBD, $ngayKT);
+
+    if ($insertCTKM) {
+        echo "<script>alert('Thêm chương trình khuyến mãi thành công!');</script>";
+        echo "<script>window.location.href = 'KhuyenMai.php?';</script>";
+        exit();
+    }
 }
 ?>
 <!--main content start-->
@@ -30,34 +36,38 @@ if (isset($_POST['btn_luuCTKM'])) {
                 ?>
 
                 <div class="table-responsive">
-                    <form action="ThemCTKhuyenMai.php" method='post'>
-                        <div class="form-group">
-                            <label for="tenChuongTrinh">Tên chương trình:</label>
-                            <input type="text" class="form-control" id="tenChuongTrinh" name="tenChuongTrinh" required>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <form action="ThemCTKhuyenMai.php" method='post'>
+                                <div class="form-group">
+                                    <label for="tenChuongTrinh">Tên chương trình:</label>
+                                    <input type="text" class="form-control" id="tenChuongTrinh" name="tenChuongTrinh" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="moTa">Mô tả:</label>
+                                    <input type="text" class="form-control" id="moTa" name="moTa" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phanTramGiamGia">Phần trăm giảm giá:</label>
+                                    <input type="number" class="form-control" id="phanTramGiamGia" name="phanTramGiamGia" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ngayBatDau">Ngày bắt đầu:</label>
+                                    <input type="date" class="form-control" id="ngayBatDau" name="ngayBatDau" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ngayKetThuc">Ngày kết thúc:</label>
+                                    <input type="date" class="form-control" id="ngayKetThuc" name="ngayKetThuc" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger">
+                                        <a href="KhuyenMai.php" style="color: white;">TRỞ LẠI</a>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" name="btn_luuCTKM">LƯU</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label for="moTa">Mô tả:</label>
-                            <input type="text" class="form-control" id="moTa" name="moTa" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phanTramGiamGia">Phần trăm giảm giá:</label>
-                            <input type="number" class="form-control" id="phanTramGiamGia" name="phanTramGiamGia" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ngayBatDau">Ngày bắt đầu:</label>
-                            <input type="date" class="form-control" id="ngayBatDau" name="ngayBatDau" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ngayKetThuc">Ngày kết thúc:</label>
-                            <input type="date" class="form-control" id="ngayKetThuc" name="ngayKetThuc" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-danger">
-                                <a href="KhuyenMai.php" style="color: white;">TRỞ LẠI</a>
-                            </button>
-                            <button type="submit" class="btn btn-primary" name="btn_luuCTKM">LƯU</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
 
                 <!-- footer -->

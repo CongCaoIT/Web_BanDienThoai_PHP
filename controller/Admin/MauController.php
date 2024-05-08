@@ -13,7 +13,7 @@ class MauAdmin
 
     public function layTenMauSPtheoMaSP(int $masp)
     {
-        $query = "SELECT mau.TenMau FROM `sanpham` JOIN `sanpham_mau` ON sanpham.MaSP = sanpham_mau.MaSP JOIN `mau` ON sanpham_mau.MaMau = mau.MaMau WHERE sanpham.MaSP = ?;";
+        $query = "SELECT mau.MaMau, mau.TenMau FROM `sanpham` JOIN `sanpham_mau` ON sanpham.MaSP = sanpham_mau.MaSP JOIN `mau` ON sanpham_mau.MaMau = mau.MaMau WHERE sanpham.MaSP = ?;";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $masp);
         $stmt->execute();
@@ -23,6 +23,7 @@ class MauAdmin
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $mau = new Mau();
+                $mau->setMaMau($row['MaMau']);
                 $mau->setTenMau($row['TenMau']);
                 $dsMau[] = $mau;
             }
@@ -80,6 +81,34 @@ class MauAdmin
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $masp, $mamau);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateSoLuongTon1($mapn)
+    {
+        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau1 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau1 AND chitietphieunhap.MaPN = ?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $mapn);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateSoLuongTon2($mapn)
+    {
+        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau2 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau2 AND chitietphieunhap.MaPN = ?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $mapn);
 
         if ($stmt->execute()) {
             return true;
