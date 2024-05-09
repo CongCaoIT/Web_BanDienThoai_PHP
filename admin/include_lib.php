@@ -16,12 +16,14 @@ include('../model/DonDatHang.php');
 include('../model/GioHang.php');
 include('../model/KhuyenMai.php');
 include('../model/MaHoa.php');
+include('../model/ThongKe.php');
 
 include('../controller/Admin/SanPhamController.php');
 include('../controller/Admin/ChiTietSanPhamController.php');
 include('../controller/Admin/LoaiSanPhamController.php');
 include('../controller/Admin/NhaCungCapController.php');
 include('../controller/Admin/MauController.php');
+include('../controller/Admin/ThongKeController.php');
 
 include('../controller/donHang.php');
 include('../controller/phieuNhapController.php');

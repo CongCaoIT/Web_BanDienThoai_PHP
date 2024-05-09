@@ -1,29 +1,36 @@
 <?php
 include('../admin/inc/header.php');
 include('../admin/inc/sidebar.php');
+
+$tk = new ThongKeAdmin();
+$dsTK = $tk->layDSThongKe();
+
+// Tạo một mảng chứa dữ liệu từ $dsTK
+$dataProvider = array();
+foreach ($dsTK as $thongKe) {
+    $data = array(
+        'date' => $thongKe->getNgay(), // Ngày
+        'sales1' => $thongKe->getTienLoi(), // Tiền lời
+        'sales2' => $thongKe->getTongDoanhThu(), // Tổng doanh thu
+        'market1' => $thongKe->getTongSoDonDatHang(),
+        'market2' => $thongKe->getTongSoDonDaThanhToan()
+        // Thêm các trường khác nếu cần
+    );
+    array_push($dataProvider, $data);
+}
+
+// Chuyển mảng thành chuỗi JSON
+$jsonDataProvider = json_encode($dataProvider);
 ?>
-
-<!-- Bootstrap Core CSS -->
-<!-- <link href="../admin/charts/css/bootstrap.css" rel='stylesheet' type='text/css' /> -->
-
 <!-- Custom CSS -->
 <link href="../admin/charts/css/style.css" rel='stylesheet' type='text/css' />
 
-<!-- font-awesome icons CSS -->
-<!-- <link href="../admin/charts/css/font-awesome.css" rel="stylesheet"> -->
-<!-- //font-awesome icons CSS -->
-
-<!-- side nav css file -->
-<link href='../admin/charts/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
+<!-- side nav css file --><link href='../admin/charts/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
 <!-- side nav css file -->
 
 <!-- js-->
 <script src="../admin/charts/js/jquery-1.11.1.min.js"></script>
 <script src="../admin/charts/js/modernizr.custom.js"></script>
-
-<!--webfonts-->
-<link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-<!--//webfonts-->
 
 <!-- Metis Menu -->
 <script src="../admin/charts/js/metisMenu.min.js"></script>
@@ -39,7 +46,7 @@ include('../admin/inc/sidebar.php');
 
     #chartdiv1 {
         width: 100%;
-        height: 295px;
+        height: 500px;
     }
 
     .jqcandlestick-container {
@@ -52,18 +59,18 @@ include('../admin/inc/sidebar.php');
 <section id="main-content">
     <section class="wrapper">
         <div class="market-updates">
-            <h3 class="mb-2"><a href="SanPham.php?ma=1" style="color:black;">Sản phẩm</a> / Thêm sản phẩm</h3>
+            <h3 class="mb-2"><a href="SanPham.php?ma=1" style="color:black;">Thống kê</a> / Doanh thu/h3>
         </div>
         <!-- Menu ngang -->
         <div class="container-fluid bg-white p-4">
             <div id="contentArea">
-                <div id="page-wrapper">
-                    <h2 class="title1">Charts</h2>
+                <div id="page-wrapper pt-2">
+                    <h2 class="title1">Thống kê</h2>
                     <div class="charts">
 
                         <div class="col-md-12 charts-grids1 widget1 states-mdl1">
                             <div class="card-header">
-                                <h3>Column & Line Graph</h3>
+                                <h3>Điểu đồ cột và đường</h3>
                             </div>
                             <div id="chartdiv1"></div>
                         </div>
@@ -80,6 +87,8 @@ include('../admin/inc/sidebar.php');
                     <!-- for amcharts js -->
 
                     <script src="../admin/charts/js/index2.js"></script>
+
+                    <!-- for amcharts js -->
                     <!-- for amcharts js -->
                     <script src="../admin/charts/js/amcharts.js"></script>
                     <script src="../admin/charts/js/serial.js"></script>
@@ -93,21 +102,17 @@ include('../admin/inc/sidebar.php');
         </div>
     </section>
 </section>
-<!-- main content start-->
 
-<script src="../admin/charts/js/index.js"></script>
-
-<!-- new added graphs chart js-->
-<!-- <script src="js/bootstrap.js"></script> -->
-<script src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="js/jquery.scrollTo.js"></script>
+<!-- <script src="../admin/js/bootstrap.js"></script> -->
+<script src="../admin/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../admin/js/scripts.js"></script>
+<script src="../admin/js/jquery.slimscroll.js"></script>
+<script src="../admin/js/jquery.nicescroll.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../admin/js/flot-chart/excanvas.min.js"></script><![endif]-->
+<script src="../admin/js/jquery.scrollTo.js"></script>
 <!-- morris JavaScript -->
 <!-- calendar -->
-<script type="text/javascript" src="js/monthly.js"></script>
+<script type="text/javascript" src="../admin/js/monthly.js"></script>
 <script type="text/javascript">
     $(window).load(function() {
 
@@ -286,8 +291,6 @@ include('../admin/inc/sidebar.php');
 <script src="../admin/charts/js/scripts.js"></script>
 <!--//scrolling js-->
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../admin/charts/js/bootstrap.js"> </script>
 
 <!-- candlestick --><!-- for points and multiple y-axis charts js -->
 <script type="text/javascript" src="../admin/charts/js/jquery.jqcandlestick.min.js"></script>
@@ -300,3 +303,131 @@ include('../admin/inc/sidebar.php');
     $('.sidebar-menu').SidebarNav()
 </script>
 <!-- //side nav js -->
+
+<script>
+    var chart = AmCharts.makeChart("chartdiv1", {
+        type: "serial",
+        theme: "light",
+        dataDateFormat: "YYYY-MM-DD",
+        precision: 2,
+        valueAxes: [{
+                id: "v1",
+                title: "Tiền",
+                position: "left",
+                autoGridCount: false,
+                labelFunction: function(value) {
+                    return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " VND";
+                },
+            },
+            {
+                id: "v2",
+                title: "Số đơn",
+                gridAlpha: 0,
+                position: "right",
+                autoGridCount: false,
+            },
+        ],
+        graphs: [{
+                id: "g3",
+                valueAxis: "v1",
+                lineColor: "#e1ede9",
+                fillColors: "#e1ede9",
+                fillAlphas: 1,
+                type: "column",
+                title: "Tổng",
+                valueField: "sales2",
+                clustered: false,
+                columnWidth: 0.5,
+                legendValueText: "[[value]] VND",
+                balloonText: "[[title]]<br /><b style='font-size: 130%'>[[value]] VND</b>",
+            },
+            {
+                id: "g4",
+                valueAxis: "v1",
+                lineColor: "#62cf73",
+                fillColors: "#62cf73",
+                fillAlphas: 1,
+                type: "column",
+                title: "Tiền lời",
+                valueField: "sales1",
+                clustered: false,
+                columnWidth: 0.3,
+                legendValueText: "[[value]] VND",
+                balloonText: "[[title]]<br /><b style='font-size: 130%'>[[value]] VND</b>",
+            },
+            {
+                id: "g1",
+                valueAxis: "v2",
+                bullet: "round",
+                bulletBorderAlpha: 1,
+                bulletColor: "#FFFFFF",
+                bulletSize: 5,
+                hideBulletsCount: 50,
+                lineThickness: 2,
+                lineColor: "#20acd4",
+                type: "smoothedLine",
+                title: "Đơn đã đặt hàng",
+                useLineColorForBulletBorder: true,
+                valueField: "market1",
+                balloonText: "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>",
+            },
+            {
+                id: "g2",
+                valueAxis: "v2",
+                bullet: "round",
+                bulletBorderAlpha: 1,
+                bulletColor: "#FFFFFF",
+                bulletSize: 5,
+                hideBulletsCount: 50,
+                lineThickness: 2,
+                lineColor: "#e1ede9",
+                type: "smoothedLine",
+                dashLength: 5,
+                title: "Đơn đã thanh toán",
+                useLineColorForBulletBorder: true,
+                valueField: "market2",
+                balloonText: "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>",
+            },
+        ],
+        chartScrollbar: {
+            graph: "g1",
+            oppositeAxis: false,
+            offset: 30,
+            scrollbarHeight: 50,
+            backgroundAlpha: 0,
+            selectedBackgroundAlpha: 0.1,
+            selectedBackgroundColor: "#888888",
+            graphFillAlpha: 0,
+            graphLineAlpha: 0.5,
+            selectedGraphFillAlpha: 0,
+            selectedGraphLineAlpha: 1,
+            autoGridCount: true,
+            color: "#AAAAAA",
+        },
+        chartCursor: {
+            pan: true,
+            valueLineEnabled: true,
+            valueLineBalloonEnabled: true,
+            cursorAlpha: 0,
+            valueLineAlpha: 0.2,
+        },
+        categoryField: "date",
+        categoryAxis: {
+            parseDates: true,
+            dashLength: 1,
+            minorGridEnabled: true,
+        },
+        legend: {
+            useGraphSettings: true,
+            position: "top",
+        },
+        balloon: {
+            borderThickness: 1,
+            shadowAlpha: 0,
+        },
+        export: {
+            enabled: true,
+        },
+        dataProvider: <?php echo $jsonDataProvider; ?>
+    });
+</script>
