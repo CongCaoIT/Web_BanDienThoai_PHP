@@ -17,6 +17,7 @@ include('../model/GioHang.php');
 include('../model/KhuyenMai.php');
 include('../model/MaHoa.php');
 include('../model/ThongKe.php');
+include('../model/ThongTinDatHang.php');
 
 include('../controller/Admin/SanPhamController.php');
 include('../controller/Admin/ChiTietSanPhamController.php');

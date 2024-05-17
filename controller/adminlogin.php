@@ -17,6 +17,7 @@ class adminlogin
         $this->fm = new Format();
         $this->tv = new ThanhVien();
     }
+
     public function login_admin($adminUser, $adminPass)
     {
         $this->tv->setTaiKhoan($this->fm->validation($adminUser));
@@ -28,7 +29,7 @@ class adminlogin
         if (empty($this->tv->getTaiKhoan()) || empty($this->tv->getMatKhau())) { // người dùng ko nhập tk mk
             $alert = "Tài khoản và mật khẩu không được để trống";
             return $alert;
-        } else { // có nhập
+        } else {
             $maHoa = new MaHoa(); // Tạo một đối tượng mới của lớp MaHoa
             $adminUser = $maHoa->ma_hoa_md5($this->tv->getTaiKhoan());
             $adminPass = $maHoa->ma_hoa_md5($this->tv->getMatKhau()); // Mã hóa mật khẩu sử dụng hàm ma_hoa_md5()
@@ -36,14 +37,23 @@ class adminlogin
             $query = "SELECT * FROM thanhvien WHERE TaiKhoan = '$adminUser' AND MatKhau = '$adminPass' LIMIT 1";
             $result = $this->db->select($query);
 
-            if ($result != false) { // tức là tk mk đúng
-                $value = $result->fetch_assoc(); //lấy dữ liệu ra
-                Session::set('adminlogin', true); //đã tồn tại adminlogin này r
-                Session::set('adminId', $value['MaTV']); //adminId (tự do nhập tên)  ---- $value['adminId'] là tên trường trong SQL bắt buộc khớp
-                Session::set('adminUser', $value['TaiKhoan']);
-                Session::set('adminName', $value['MatKhau']);
+            if ($result != false) {
+                $value = $result->fetch_assoc();
 
-                echo "<script>window.location.href = 'index.php';</script>";
+                if ($value['MaLoaiTV'] == 1) {
+                    Session::set('adminlogin', true);
+                    Session::set('adminId', $value['MaTV']);
+                    Session::set('adminUser', $value['TaiKhoan']);
+                    Session::set('adminName', $value['HoTen']); // Lưu tên người dùng vào session
+
+                    echo "<script>window.location.href = 'index.php';</script>";
+                } else if ($value['MaLoaiTV'] == 2) {
+                    $alert = "Bạn không có quyền truy cập.";
+                    return $alert;
+                } else {
+                    $alert = "Tài khoản hoặc mật khẩu không đúng";
+                    return $alert;
+                }
             } else {
                 $alert = "Tài khoản hoặc mật khẩu không đúng";
                 return $alert;

@@ -8,13 +8,21 @@ class ThongTinDatHang
     private $diaChiGiaoHang;
     private $maDDH;
 
-    public function __construct($thongTinDatHang)
+    public function __construct($thongTinDatHang = null, $maTTDH = null, $hoTen = null, $sdt = null, $email = null, $diaChiGiaoHang = null)
     {
-        $this->maTTDH = $thongTinDatHang['MaTTDH'];
-        $this->hoTen = $thongTinDatHang['HoTen'];
-        $this->sdt = $thongTinDatHang['SDT'];
-        $this->email = $thongTinDatHang['Email'];
-        $this->diaChiGiaoHang = $thongTinDatHang['DiaChiGiaoHang'];
+        if ($thongTinDatHang !== null) {
+            $this->maTTDH = $thongTinDatHang['MaTTDH'];
+            $this->hoTen = $thongTinDatHang['HoTen'];
+            $this->sdt = $thongTinDatHang['SDT'];
+            $this->email = $thongTinDatHang['Email'];
+            $this->diaChiGiaoHang = $thongTinDatHang['DiaChiGiaoHang'];
+        } else {
+            $this->maTTDH = $maTTDH;
+            $this->hoTen = $hoTen;
+            $this->sdt = $sdt;
+            $this->email = $email;
+            $this->diaChiGiaoHang = $diaChiGiaoHang;
+        }
     }
 
     // Getter và setter cho từng thuộc tính

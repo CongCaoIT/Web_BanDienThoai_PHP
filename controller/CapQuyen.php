@@ -11,7 +11,6 @@ class CapQuyen
         $this->fm = new Format();
     }
 
-
     public function showTTTV()
     {
         $query = "SELECT thanhvien.MaTV, loaithanhvien.TenLoai, thanhvien.HoTen, thanhvien.Email, thanhvien.SoDienThoai 
@@ -61,13 +60,22 @@ class CapQuyen
         return $dsTV;
     }
 
-    public function capNhatQuyen($ma, $quyn)
+    public function capNhatQuyen($ma, $quyen)
     {
         $ma = $this->fm->validation($ma);
-        $quyn = $this->fm->validation($quyn);
+        $quyen = $this->fm->validation($quyen);
 
-        $query = "UPDATE thanhvien SET MaLoaiTV = '$quyn' WHERE MaTV = '$ma'";
+        // Lấy ID tài khoản đang đăng nhập từ session
+        $currentAdminId = Session::get('adminId');
 
+        // Kiểm tra nếu tài khoản hiện tại cố gắng thay đổi quyền hạn của chính nó
+        if ($ma == $currentAdminId) {
+            echo '<script>alert("Bạn không thể thay đổi quyền hạn của chính mình!");</script>';
+            echo '<script>window.location.href = "PhanQuyenPage.php";</script>';
+            return;
+        }
+
+        $query = "UPDATE thanhvien SET MaLoaiTV = '$quyen' WHERE MaTV = '$ma'";
         $result = $this->db->update($query);
 
         if ($result != false) {

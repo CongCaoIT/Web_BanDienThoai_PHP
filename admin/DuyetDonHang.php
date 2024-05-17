@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 ?>
 
 <!--main content start-->
@@ -60,11 +60,12 @@ include ('../admin/inc/sidebar.php');
                         <thead>
                             <tr>
                                 <th>Mã đơn hàng</th>
-                                <th>Mã khách hàng</th>
+                                <th>Tên khách hàng</th>
                                 <th>Ngày đặt hàng</th>
+                                <th>Tình trạng</th>
                                 <th>Ngày nhận hàng</th>
-                                <th>Quà tặng</th>
                                 <th>Thanh toán</th>
+                                <th>Quà tặng</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -75,20 +76,44 @@ include ('../admin/inc/sidebar.php');
                             ?>
                                 <tr>
                                     <td><?php echo $ma; ?></td>
-                                    <td><?php echo $donDatHang->getMaTV(); ?></td>
+                                    <td><?php echo $donDatHang->ttdh->getHoTen(); ?></td>
                                     <td><?php echo $donDatHang->getNgayDatHang(); ?></td>
-                                    <td><?php echo $donDatHang->getNgayGiao(); ?></td>
-                                    <td><?php echo $donDatHang->getQuaTang(); ?></td>
+                                    <td><?php echo $donDatHang->getTinhTrang(); ?></td>
+                                    <td>
+                                        <?php
+                                        if ($donDatHang->getNgayGiao() != null) {
+                                            echo $donDatHang->getNgayGiao();
+                                        } else {
+                                            echo "Trống";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($donDatHang->getDaThanhToan() != null) {
+                                            echo "Đã thanh toán";
+                                        } else {
+                                            echo "Chưa thanh toán";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($donDatHang->getQuaTang() != null) {
+                                            echo $donDatHang->getQuaTang();
+                                        } else {
+                                            echo "Không";
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?php echo $donDatHang->getThanhTien(); ?></td>
                                     <td>
-                                        <input type="button" class="btn btn-primary" onclick="window.location.href='<?php echo $chedo; ?>?id=<?php echo $ma; ?>'" value="<?php echo $tenNut; ?>" />
-
+                                        <input type="button" class="btn btn-primary" onclick="window.location.href='<?php echo $chedo; ?>?ma=<?php echo $ma; ?>'" value="<?php echo $tenNut; ?>" />
                                     </td>
                                 </tr>
                             <?php
                             }
                             ?>
-
                         </tbody>
                     </table>
                 </div>
@@ -120,91 +145,6 @@ include ('../admin/inc/sidebar.php');
                 jQuery(this).closest('.small-graph-box').fadeOut(200);
                 return false;
             });
-
-            //CHARTS
-            function gd(year, day, month) {
-                return new Date(year, month - 1, day).getTime();
-            }
-
-            graphArea2 = Morris.Area({
-                element: 'hero-area',
-                padding: 10,
-                behaveLikeLine: true,
-                gridEnabled: false,
-                gridLineColor: '#dddddd',
-                axes: true,
-                resize: true,
-                smooth: true,
-                pointSize: 0,
-                lineWidth: 0,
-                fillOpacity: 0.85,
-                data: [{
-                        period: '2015 Q1',
-                        iphone: 2668,
-                        ipad: null,
-                        itouch: 2649
-                    },
-                    {
-                        period: '2015 Q2',
-                        iphone: 15780,
-                        ipad: 13799,
-                        itouch: 12051
-                    },
-                    {
-                        period: '2015 Q3',
-                        iphone: 12920,
-                        ipad: 10975,
-                        itouch: 9910
-                    },
-                    {
-                        period: '2015 Q4',
-                        iphone: 8770,
-                        ipad: 6600,
-                        itouch: 6695
-                    },
-                    {
-                        period: '2016 Q1',
-                        iphone: 10820,
-                        ipad: 10924,
-                        itouch: 12300
-                    },
-                    {
-                        period: '2016 Q2',
-                        iphone: 9680,
-                        ipad: 9010,
-                        itouch: 7891
-                    },
-                    {
-                        period: '2016 Q3',
-                        iphone: 4830,
-                        ipad: 3805,
-                        itouch: 1598
-                    },
-                    {
-                        period: '2016 Q4',
-                        iphone: 15083,
-                        ipad: 8977,
-                        itouch: 5185
-                    },
-                    {
-                        period: '2017 Q1',
-                        iphone: 10697,
-                        ipad: 4470,
-                        itouch: 2038
-                    },
-
-                ],
-                lineColors: ['#eb6f6f', '#926383', '#eb6f6f'],
-                xkey: 'period',
-                redraw: true,
-                ykeys: ['iphone', 'ipad', 'itouch'],
-                labels: ['All Visitors', 'Returning Visitors', 'Unique Visitors'],
-                pointSize: 2,
-                hideHover: 'auto',
-                resize: true
-            });
-
-
         });
     </script>
     <!-- calendar -->
@@ -238,7 +178,8 @@ include ('../admin/inc/sidebar.php');
 
         });
     </script>
-    <!-- //calendar -->
-    </body>
+</section>
+<!-- //calendar -->
+</body>
 
-    </html>
+</html>

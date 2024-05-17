@@ -9,6 +9,7 @@ if (isset($_POST['login'])) {
 }
 ?>
 <!DOCTYPE html>
+<html>
 
 <head>
 	<title>Login</title>
@@ -16,9 +17,9 @@ if (isset($_POST['login'])) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script type="application/x-javascript">
 		addEventListener("load", function() {
 			setTimeout(hideURLbar, 0);
@@ -42,34 +43,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //font-awesome icons -->
 	<script src="js/jquery2.0.3.min.js"></script>
 	<style>
-        .log-w3 {
-            text-align: center;
-        }
-    </style>
+		.log-w3 {
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
-<div class="log-w3">
-        <div class="w3layouts-main">
-            <h2>ĐĂNG NHÂP</h2>
-            <div class="text-center" style="color: red;">
-                <?php
-                    if (isset($login_check)) {
-                        echo $login_check; //  xuất ra thông báo nếu nhập sai 
-                    }
-                ?>
-            </div>
-            <form action="#" method="post">
-                <input type="text" class="ggg" placeholder="Username" name="adminUser" required="">
-                <input type="password" class="ggg" placeholder="Password" name="adminPass" required="">
-                <span><input type="checkbox" />Nhớ Mật Khẩu</span>
-                <h6><a href="ForgotPass.php">Quên Mật Khẩu?</a></h6>
-                <div class="clearfix"></div>
-                <input type="submit" value="Sign In" name="login">
-            </form>
-            <p>Bạn chưa có tài khoản?<a href="registration.php">Tạo tài khoản</a></p>
-        </div>
-    </div>
+	<div class="log-w3">
+		<div class="w3layouts-main">
+			<h2>ĐĂNG NHÂP</h2>
+			<div class="text-center" style="color: red;">
+				<?php
+				if (isset($login_check)) {
+					echo $login_check; // xuất ra thông báo nếu nhập sai 
+				}
+				?>
+			</div>
+			<form action="#" method="post">
+				<input type="text" class="ggg" placeholder="Username" name="adminUser" required="">
+				<input type="password" class="ggg" placeholder="Password" name="adminPass" required="">
+				<span><input type="checkbox" />Nhớ Mật Khẩu</span>
+				<h6><a href="ForgotPass.php">Quên Mật Khẩu?</a></h6>
+				<div class="clearfix"></div>
+				<input type="submit" value="Sign In" name="login">
+			</form>
+			<p>Bạn chưa có tài khoản?<a href="registration.php">Tạo tài khoản</a></p>
+		</div>
+	</div>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="js/scripts.js"></script>

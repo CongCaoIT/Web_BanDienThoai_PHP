@@ -16,13 +16,15 @@ class DonDatHang
     public $chitietDH;
     public $sp;
     public $tv;
+    public $ttdh;
     public $maTTDH;
 
     public function __construct($donDatHang = null, $maDDH = null, $maTV = null, $ngayDatHang = null, $ngayGiao = null, $daThanhToan = null, $quaTang = null, $tinhTrang = null, $daXoa = null, $thanhTien = null, $maTTDH = null)
     {
-        $this->sp = new SanPham(); // Initialize the product object
-        $this->chitietDH = new ChiTietDonDatHang(); // Initialize the order details object
-        $this->tv = new ThanhVien(); // Initialize the member object
+        $this->sp = new SanPham();
+        $this->chitietDH = new ChiTietDonDatHang();
+        $this->tv = new ThanhVien();
+        $this->ttdh = new ThongTinDatHang();
 
         if ($donDatHang !== null) {
             $this->maDDH = $donDatHang['MaDDH'];
