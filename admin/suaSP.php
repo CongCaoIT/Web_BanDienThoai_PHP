@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 $sp = new SanPhamAdmin();
 
 $ncc = new NhaCungCapAdmin();
@@ -32,21 +32,21 @@ if (isset($_POST['btn_Luu'])) {
     foreach ($dsSanPham as $sptheoma) {
         // Nếu người dùng đã chọn file hình ảnh mới, di chuyển và lưu file vào thư mục trên server
         if (!empty($hinh1)) {
-            $targetDir = "../data/Products/";
+            $targetDir = "../view/images/products/";
             move_uploaded_file($_FILES['HinhAnh1']['tmp_name'], $targetDir . $hinh1);
         } else {
             $hinh1 = $sptheoma->getHinhAnh(); // Sử dụng đường dẫn mặc định cho hình ảnh
         }
 
         if (!empty($hinh2)) {
-            $targetDir = "../data/Products/";
+            $targetDir = "../view/images/products/";
             move_uploaded_file($_FILES['HinhAnh2']['tmp_name'], $targetDir . $hinh2);
         } else {
             $hinh2 = $sptheoma->getHinhAnh2(); // Sử dụng đường dẫn mặc định cho hình ảnh
         }
 
         if (!empty($hinh3)) {
-            $targetDir = "../data/Products/";
+            $targetDir = "../view/images/products/";
             move_uploaded_file($_FILES['HinhAnh3']['tmp_name'], $targetDir . $hinh3);
         } else {
             $hinh3 = $sptheoma->getHinhAnh3(); // Sử dụng đường dẫn mặc định cho hình ảnh
@@ -166,21 +166,21 @@ if (isset($_POST['btn_Luu'])) {
                                     <label for="HinhAnh1">Hình ảnh 1</label>
                                     <input type="file" id="HinhAnh1" name="HinhAnh1" class="form-control-file">
                                     <br />
-                                    <img src="../data/Products/<?php echo $sp->getHinhAnh() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
+                                    <img src="../view/images/products/<?php echo $sp->getHinhAnh() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="HinhAnh2">Hình ảnh 2</label>
                                     <input type="file" id="HinhAnh2" name="HinhAnh2" class="form-control-file">
                                     <br />
-                                    <img src="../data/Products/<?php echo $sp->getHinhAnh2() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
+                                    <img src="../view/images/products/<?php echo $sp->getHinhAnh2() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="HinhAnh3">Hình ảnh 3</label>
                                     <input type="file" id="HinhAnh3" name="HinhAnh3" class="form-control-file">
                                     <br />
-                                    <img src="../data/Products/<?php echo $sp->getHinhAnh3() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
+                                    <img src="../view/images/products/<?php echo $sp->getHinhAnh3() ?>" alt="Alternate Text" style="width:250px;height:auto;" />
                                 </div>
 
                                 <div class="form-group">

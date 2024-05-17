@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 
 $ncc = new NhaCungCapAdmin();
 $dsNCC = $ncc->layDSNhaCungCap();
@@ -19,7 +19,7 @@ if (isset($_POST['btn_Luu'])) {
     $moi = isset($_POST['Moi']) ? (int)$_POST['Moi'] : 0;
     $daxoa = isset($_POST['DaXoa']) ? (int)$_POST['DaXoa'] : 0;
 
-    $targetDir = "..//data//Products//";
+    $targetDir = "../view/images/products/";
 
     $hinh1 = $_FILES['HinhAnh1']['name'];
     $hinh2 = $_FILES['HinhAnh2']['name'];

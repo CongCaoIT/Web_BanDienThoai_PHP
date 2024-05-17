@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 $ctsp = new ChiTietSanPhamAdmin();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra nút Lưu đã được nhấn
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="ml-2 mt-2" role="alert">
                                     <h3 class="mt-2 mb-3">Sản phẩm đã có thông tin chi tiết.</h3>
                                     <div class="btn-group mb-2" role="group">
-                                        <a href="ChiTietSanPham.php?ma=1" class="btn btn-danger mr-2">Trở lại</a>
+                                        <a href="SanPham.php?ma=1" class="btn btn-danger mr-2">Trở lại</a>
                                         <a href="XemChiTietSanPham.php?ma=<?php echo $_GET['ma'] ?>" class="btn btn-primary">Xem chi tiết</a>
                                     </div>
                                 </div>

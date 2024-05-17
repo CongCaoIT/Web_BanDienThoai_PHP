@@ -22,8 +22,8 @@ if (isset($_POST['btn_nhapHang'])) {
 
     if ($themCTPN) {
         $updateDonGia = $sp->updateGiaSanPham($mapn);
-        $updateSLTMau1 = $mau->updateSoLuongTon1($mapn);
-        $updateSLTMau2 = $mau->updateSoLuongTon2($mapn);
+        $updateSLTMau1 = $mau->updateSoLuongTon1($mapn, $masp);
+        $updateSLTMau2 = $mau->updateSoLuongTon2($mapn, $masp);
         echo "<script>alert('Thêm phiếu nhập thành công!');</script>";
         echo "<script>window.location.href = 'SanPham.php?ma=1';</script>";
         exit();

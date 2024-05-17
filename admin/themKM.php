@@ -88,7 +88,7 @@ if (isset($_POST['btn_Luu'])) {
                                     </div>
 
                                     <div class="form-group" style="margin-top: 12px;">
-                                        <a href="SanPham?ma=<?php echo $masp ?>" class="btn btn-danger">Trở lại</a>
+                                        <a href="SanPham.php?ma=<?php echo $masp ?>" class="btn btn-danger">Trở lại</a>
                                         <button type="submit" class="btn btn-primary" name="btn_Luu">Lưu</button>
                                     </div>
                                 </form>

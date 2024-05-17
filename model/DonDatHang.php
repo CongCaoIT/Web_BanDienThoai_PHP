@@ -2,7 +2,8 @@
 require_once 'SanPham.php';
 require_once 'thanhvien.php';
 
-class DonDatHang {
+class DonDatHang
+{
     private $maDDH;
     private $maTV;
     private $ngayDatHang;
@@ -12,110 +13,154 @@ class DonDatHang {
     private $tinhTrang;
     private $daXoa;
     private $thanhTien;
-    public $chitietDH; 
+    public $chitietDH;
     public $sp;
     public $tv;
+    public $maTTDH;
 
-    public function __construct($maDDH = null, $maTV = null, $ngayDatHang = null, $ngayGiao = null, $daThanhToan = null, $quaTang = null, $tinhTrang = null, $daXoa = null, $thanhTien = null) {
-        $this->maDDH = $maDDH;
-        $this->maTV = $maTV;
-        $this->ngayDatHang = $ngayDatHang;
-        $this->ngayGiao = $ngayGiao;
-        $this->daThanhToan = $daThanhToan;
-        $this->quaTang = $quaTang;
-        $this->tinhTrang = $tinhTrang;
-        $this->daXoa = $daXoa;
-        $this->thanhTien = $thanhTien;
-        $this->chitietDH = new ChiTietDonDatHang(); 
-        $this->sp = new SanPham();
-        $this->tv = new ThanhVien();
+    public function __construct($donDatHang = null, $maDDH = null, $maTV = null, $ngayDatHang = null, $ngayGiao = null, $daThanhToan = null, $quaTang = null, $tinhTrang = null, $daXoa = null, $thanhTien = null, $maTTDH = null)
+    {
+        $this->sp = new SanPham(); // Initialize the product object
+        $this->chitietDH = new ChiTietDonDatHang(); // Initialize the order details object
+        $this->tv = new ThanhVien(); // Initialize the member object
+
+        if ($donDatHang !== null) {
+            $this->maDDH = $donDatHang['MaDDH'];
+            $this->maTV = $donDatHang['MaTV'];
+            $this->ngayDatHang = $donDatHang['NgayDatHang'];
+            $this->ngayGiao = $donDatHang['NgayGiao'];
+            $this->daThanhToan = $donDatHang['DaThanhToan'];
+            $this->quaTang = $donDatHang['QuaTang'];
+            $this->tinhTrang = $donDatHang['TinhTrang'];
+            $this->daXoa = $donDatHang['DaXoa'];
+            $this->thanhTien = $donDatHang['thanhTien'];
+            $this->maTTDH = $donDatHang['MaTTDH'];
+        } else {
+            $this->maDDH = $maDDH;
+            $this->maTV = $maTV;
+            $this->ngayDatHang = $ngayDatHang;
+            $this->ngayGiao = $ngayGiao;
+            $this->daThanhToan = $daThanhToan;
+            $this->quaTang = $quaTang;
+            $this->tinhTrang = $tinhTrang;
+            $this->daXoa = $daXoa;
+            $this->thanhTien = $thanhTien;
+            $this->maTTDH = $maTTDH;
+        }
     }
-    
 
-    public function getMaDDH() {
+    public function getMaTTDH()
+    {
+        return $this->maTTDH;
+    }
+
+    public function setMaTTDH($maTTDH)
+    {
+        $this->maTTDH = $maTTDH;
+    }
+
+    public function getMaDDH()
+    {
         return $this->maDDH;
     }
-    
-    public function setMaDDH($maDDH) {
+
+    public function setMaDDH($maDDH)
+    {
         $this->maDDH = $maDDH;
     }
-    
-    public function getMaTV() {
+
+    public function getMaTV()
+    {
         return $this->maTV;
     }
-    
-    public function setMaTV($maTV) {
+
+    public function setMaTV($maTV)
+    {
         $this->maTV = $maTV;
     }
-    
-    public function getNgayDatHang() {
+
+    public function getNgayDatHang()
+    {
         return $this->ngayDatHang;
     }
-    
-    public function setNgayDatHang($ngayDatHang) {
+
+    public function setNgayDatHang($ngayDatHang)
+    {
         $this->ngayDatHang = $ngayDatHang;
     }
-    
-    public function getNgayGiao() {
+
+    public function getNgayGiao()
+    {
         return $this->ngayGiao;
     }
-    
-    public function setNgayGiao($ngayGiao) {
+
+    public function setNgayGiao($ngayGiao)
+    {
         $this->ngayGiao = $ngayGiao;
     }
-    
-    public function getDaThanhToan() {
+
+    public function getDaThanhToan()
+    {
         return $this->daThanhToan;
     }
-    
-    public function setDaThanhToan($daThanhToan) {
+
+    public function setDaThanhToan($daThanhToan)
+    {
         $this->daThanhToan = $daThanhToan;
     }
-    
-    public function getQuaTang() {
+
+    public function getQuaTang()
+    {
         return $this->quaTang;
     }
-    
-    public function setQuaTang($quaTang) {
+
+    public function setQuaTang($quaTang)
+    {
         $this->quaTang = $quaTang;
     }
-    
-    public function getTinhTrang() {
+
+    public function getTinhTrang()
+    {
         return $this->tinhTrang;
     }
-    
-    public function setTinhTrang($tinhTrang) {
+
+    public function setTinhTrang($tinhTrang)
+    {
         $this->tinhTrang = $tinhTrang;
     }
-    
-    public function getDaXoa() {
+
+    public function getDaXoa()
+    {
         return $this->daXoa;
     }
-    
-    public function setDaXoa($daXoa) {
+
+    public function setDaXoa($daXoa)
+    {
         $this->daXoa = $daXoa;
     }
 
-    public function getThanhTien() {
+    public function getThanhTien()
+    {
         return $this->thanhTien;
     }
-    
-    public function setThanhTien($thanhTien) {
+
+    public function setThanhTien($thanhTien)
+    {
         $this->thanhTien = $thanhTien;
     }
 
-    public function getTenSP() {
+    public function getTenSP()
+    {
         return $this->sp->getTenSP();
     }
 
-    public function getSoLuongNhap() {
+    public function getSoLuongNhap()
+    {
         return $this->chitietDH->getSoLuong();
     }
-    
-    public function getDonGia() {
+
+    public function getDonGia()
+    {
         return $this->sp->getDonGia();
     }
-    
 }
-
-?>

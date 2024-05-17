@@ -20,8 +20,8 @@
             <h6>Tinh tế, Chất lượng, Tiện ích</h6>
         </div>
         <div class="header-search">
-            <form action="#" method="post">
-                <input type="search" name="Search" placeholder="Tìm kiếm sản phẩm tại đây..." required="" />
+            <form action="./search.php" method="get">
+                <input type="search" name="keyword" placeholder="Tìm kiếm sản phẩm tại đây..." required="" />
                 <button type="submit" class="btn btn-default" aria-label="Left Align">
                     <i class="fa fa-search" aria-hidden="true"> </i>
                 </button>

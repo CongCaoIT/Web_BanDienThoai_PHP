@@ -24,7 +24,7 @@ class phieuNhapController
                 $dh->sp->setTenSP($row['TenSP']);
                 $dh->pn->setNgayNhap($row['NgayNhap']);
                 $dh->setDonGiaNhap($row['DonGiaNhap']);
-                $dh->setSoLuongNhap($row['SoLuongNhap']);
+                $dh->setSoLuongNhap($row['SoLuongNhap1']);
 
                 $DSPNResults[] = $dh;
             }

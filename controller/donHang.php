@@ -21,11 +21,32 @@ class donHang
 
     public function showDonDatHang()
     {
-        $this->db->callProcedure('UpdateThanhTien');
-        $completedOrdersResult = $this->db->callProcedure('GetCompletedOrders');
+        $query = "SELECT 
+        ddh.MaDDH,
+        ddh.MaTV,
+        ddh.NgayDatHang,
+        ddh.NgayGiao,
+        sp.TenSP,
+        ctddh.SoLuong,
+        ctddh.DonGia,
+        ddh.thanhTien
+    FROM 
+        DONDATHANG ddh
+    JOIN 
+        CHITIETDONDATHANG ctddh ON ddh.MaDDH = ctddh.MaDDH
+    JOIN 
+        SANPHAM sp ON ctddh.MaSP = sp.MaSP
+    ORDER BY 
+        ddh.NgayDatHang DESC;
+    ";
 
-        if ($completedOrdersResult) {
-            while ($row = $completedOrdersResult->fetch_assoc()) {
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $dsDonDatHang = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $dh = new DonDatHang();
                 $dh->setMaDDH($row['MaDDH']);
                 $dh->setMaTV($row['MaTV']);
@@ -35,13 +56,12 @@ class donHang
                 $dh->chitietDH->setSoLuong($row['SoLuong']);
                 $dh->sp->setDonGia($row['DonGia']);
                 $dh->setThanhTien($row['thanhTien']);
-                // Thêm đối tượng DonDatHang vào mảng
-                $completedOrders[] = $dh;
+                $dsDonDatHang[] = $dh;
             }
         } else {
             echo "Chưa có đơn hàng";
         }
-        return $completedOrders;
+        return $dsDonDatHang;
     }
 
     public function showDonChuaDuyet()

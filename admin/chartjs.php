@@ -25,7 +25,8 @@ $jsonDataProvider = json_encode($dataProvider);
 <!-- Custom CSS -->
 <link href="../admin/charts/css/style.css" rel='stylesheet' type='text/css' />
 
-<!-- side nav css file --><link href='../admin/charts/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
+<!-- side nav css file -->
+<link href='../admin/charts/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
 <!-- side nav css file -->
 
 <!-- js-->
@@ -59,7 +60,7 @@ $jsonDataProvider = json_encode($dataProvider);
 <section id="main-content">
     <section class="wrapper">
         <div class="market-updates">
-            <h3 class="mb-2"><a href="SanPham.php?ma=1" style="color:black;">Thống kê</a> / Doanh thu/h3>
+            <h3 class="mb-2"><a href="SanPham.php?ma=1" style="color:black;">Thống kê</a> / Doanh thu</h3>
         </div>
         <!-- Menu ngang -->
         <div class="container-fluid bg-white p-4">

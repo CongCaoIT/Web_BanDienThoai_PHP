@@ -17,49 +17,37 @@ class ThanhVien
     private $thoiGianMaToken;
     public $ltv;
 
-    public function __construct($maTV = null, $maLoaiTV = null, $taiKhoan = null, $matKhau = null, $hoTen = null, $diaChi = null, $email = null, $sdt = null, $cauHoi = null, $cauTraLoi = null, $hinhDaiDien = null, $maToken = null, $thoiGianMaToken = null)
+    public function __construct($thanhVien = null, $maTV = null, $maLoaiTV = null, $taiKhoan = null, $matKhau = null, $hoTen = null, $diaChi = null, $email = null, $sdt = null, $cauHoi = null, $cauTraLoi = null, $hinhDaiDien = null, $maToken = null, $thoiGianMaToken = null)
     {
-        if ($maTV !== null) {
+        if ($thanhVien !== null) {
+            $this->maTV = $thanhVien['MaTV'];
+            $this->maLoaiTV = $thanhVien['MaLoaiTV'];
+            $this->taiKhoan = $thanhVien['TaiKhoan'];
+            $this->matKhau = $thanhVien['MatKhau'];
+            $this->hoTen = $thanhVien['HoTen'];
+            $this->diaChi = $thanhVien['DiaChi'];
+            $this->email = $thanhVien['Email'];
+            $this->sdt = $thanhVien['SoDienThoai'];
+            $this->cauHoi = $thanhVien['CauHoi'];
+            $this->cauTraLoi = $thanhVien['CauTraLoi'];
+            $this->hinhDaiDien = $thanhVien['HinhDaiDien'];
+            $this->maToken = $thanhVien['MaToken'];
+            $this->thoiGianMaToken = $thanhVien['ThoiGianMaToken'];
+        } else {
             $this->maTV = $maTV;
-        }
-        if ($maLoaiTV !== null) {
             $this->maLoaiTV = $maLoaiTV;
-        }
-        if ($taiKhoan !== null) {
             $this->taiKhoan = $taiKhoan;
-        }
-        if ($matKhau !== null) {
             $this->matKhau = $matKhau;
-        }
-        if ($hoTen !== null) {
             $this->hoTen = $hoTen;
-        }
-        if ($diaChi !== null) {
             $this->diaChi = $diaChi;
-        }
-        if ($email !== null) {
             $this->email = $email;
-        }
-        if ($sdt !== null) {
             $this->sdt = $sdt;
-        }
-        if ($cauHoi !== null) {
             $this->cauHoi = $cauHoi;
-        }
-        if ($cauTraLoi !== null) {
             $this->cauTraLoi = $cauTraLoi;
-        }
-        if ($hinhDaiDien !== null) {
             $this->hinhDaiDien = $hinhDaiDien;
-        }
-        if ($maToken !== null) {
             $this->maToken = $maToken;
-        }
-        if ($thoiGianMaToken !== null) {
             $this->thoiGianMaToken = $thoiGianMaToken;
         }
-
-        $this->ltv = new LoaiThanhVien();
     }
 
     // Getters

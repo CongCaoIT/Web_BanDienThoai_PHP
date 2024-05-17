@@ -89,12 +89,12 @@ class MauAdmin
         }
     }
 
-    public function updateSoLuongTon1($mapn)
+    public function updateSoLuongTon1($mapn, $masp)
     {
-        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau1 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau1 AND chitietphieunhap.MaPN = ?";
+        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau1 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau1 AND chitietphieunhap.MaPN = ? AND sanpham_mau.MaSP = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $mapn);
+        $stmt->bind_param("ii", $mapn, $masp);
 
         if ($stmt->execute()) {
             return true;
@@ -103,12 +103,12 @@ class MauAdmin
         }
     }
 
-    public function updateSoLuongTon2($mapn)
+    public function updateSoLuongTon2($mapn, $masp)
     {
-        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau2 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau2 AND chitietphieunhap.MaPN = ?";
+        $query = "UPDATE sanpham_mau, mau, chitietphieunhap SET SoLuongTon = SoLuongTon + chitietphieunhap.SoLuongNhapMau2 WHERE sanpham_mau.MaMau = mau.MaMau AND mau.MaMau = chitietphieunhap.MaMau2 AND chitietphieunhap.MaPN = ? AND sanpham_mau.MaSP = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $mapn);
+        $stmt->bind_param("ii", $mapn, $masp);
 
         if ($stmt->execute()) {
             return true;

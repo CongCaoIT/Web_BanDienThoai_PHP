@@ -23,6 +23,7 @@
                     <?php
                     if (isset($_SESSION['login'])) {
                     ?>
+                        <li><a href="./personal_information.php">Thông tin cá nhân </a></li>
                         <li><a href="./login.php?isLogout=true">Đăng xuất </a></li>
                     <?php
                     } else {
@@ -33,7 +34,7 @@
                     }
                     ?>
 
-                    <li><a href="#">Giỏ hàng </a></li>
+                    <!-- <li><a href="#">Giỏ hàng </a></li> -->
                     <!-- <li><a href="#">Wallet</a></li> -->
                 </ul>
             </li>

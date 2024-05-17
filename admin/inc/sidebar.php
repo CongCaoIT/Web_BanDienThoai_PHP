@@ -15,7 +15,7 @@
                 </li>
 
                 <li>
-                    <a class="active" href="DuyetDonHang.php">
+                    <a href="DuyetDonHang.php">
                         <i class="fa fa-book"></i>
                         <span>Duyệt Đơn Hàng</span>
                     </a>

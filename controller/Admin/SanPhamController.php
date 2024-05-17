@@ -142,7 +142,7 @@ class SanPhamAdmin
 
     public function layThongTinKhuyenMaiTheoMa($maKhuyenMai)
     {
-        $query = "SELECT NgayBatDau, NgayKetThuc FROM `khuyenmai` WHERE MaKhuyenMai = ?";
+        $query = "SELECT * FROM `khuyenmai` WHERE MaKhuyenMai = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $maKhuyenMai);
         $stmt->execute();

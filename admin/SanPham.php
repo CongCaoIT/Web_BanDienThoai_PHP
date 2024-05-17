@@ -133,7 +133,6 @@ $mauclass = new MauAdmin();
 						</thead>
 						<tbody>
 							<?php
-
 							$dsSanPham = $dh->showSanPham($maloai);
 							$recordsPerPage = 7;
 							if (!empty($dsSanPham)) {
@@ -143,7 +142,6 @@ $mauclass = new MauAdmin();
 								for ($i = $startIndex; $i <= $endIndex; $i++) {
 									$sp = $dsSanPham[$i];
 									$phantramkhuyenmai = $dh->layKhuyenMaitheoMaSP($sp->getMaSP());
-
 									$dsMau = $mauclass->layTenMauSPtheoMaSP($sp->getMaSP());
 									$dsSLT = $mauclass->laySLTSPtheoMaSP($sp->getMaSP());
 
@@ -152,12 +150,13 @@ $mauclass = new MauAdmin();
 										$promotionInfo = $dh->layThongTinKhuyenMaiTheoMa($sp->getMaKhuyenMai());
 										$ngayBatDau = $promotionInfo['NgayBatDau'];
 										$ngayKetThuc = $promotionInfo['NgayKetThuc'];
-
 										if ($phantramkhuyenmai != null && date('Y-m-d') >= $ngayBatDau && date('Y-m-d') <= $ngayKetThuc) {
 											$giahientai = $sp->getDonGia() - ($sp->getDonGia() * $phantramkhuyenmai / 100);
 										} else {
 											$giahientai = $sp->getDonGia();
 										}
+									} else {
+										$giahientai = $sp->getDonGia();
 									}
 							?>
 									<tr>
@@ -225,7 +224,7 @@ $mauclass = new MauAdmin();
 											foreach ($dsMau as $index => $mau) {
 										?>
 												<td>
-													<img src="..//data//Products//<?php echo ($isFirstColor ? $sp->getHinhAnh() : $sp->getHinhAnh2()) ?>" alt="" width="120px">
+													<img src="../view/images/products/<?php echo ($isFirstColor ? $sp->getHinhAnh() : $sp->getHinhAnh2()) ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;">Màu: <span style="color: red; font-weight: bold;"><?php echo $mau->getTenMau() ?></span></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[$index]->getSoLuongTon() ?></span></p>
@@ -237,13 +236,13 @@ $mauclass = new MauAdmin();
 											if ($dsSLT != null) {
 											?>
 												<td>
-													<img src="..//data//Products//<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
+													<img src="../view/images/products/<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[0]->getSoLuongTon() ?></span></p>
 												</td>
 												<td>
-													<img src="..//data//Products//<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
+													<img src="../view/images/products/<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;"><?php echo $dsSLT[1]->getSoLuongTon() ?></span></p>
@@ -252,13 +251,13 @@ $mauclass = new MauAdmin();
 											} else {
 											?>
 												<td>
-													<img src="..//data//Products//<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
+													<img src="../view/images/products/<?php echo $sp->getHinhAnh() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;">0</span></p>
 												</td>
 												<td>
-													<img src="..//data//Products//<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
+													<img src="../view/images/products/<?php echo $sp->getHinhAnh2() ?>" alt="" width="120px">
 													<br />
 													<p style="margin-top: 24px; font-size: 16px;"><a href="themMau.php?ma=<?php echo $sp->getMaSP() ?>">Thêm màu</a></p>
 													<p style="margin-top: 8px; font-size: 16px;">Số lượng: <span style="color: red; font-weight: bold;">0</span></p>

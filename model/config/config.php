@@ -1,39 +1,46 @@
 <?php
 if (!class_exists('AppConfig')) {
-    class AppConfig {
+    class AppConfig
+    {
         private static $instance = null;
-        
+
         private $dbHost = 'localhost';
         private $dbUser = 'root';
         private $dbPass = '';
-        private $dbName = 'datawebbandt';
-        
-        private function __construct() {
+        private $dbName = 'datawebbandienthoai';
+        //private $dbName = 'datawebbandt';
+
+        private function __construct()
+        {
             // Không cho phép tạo đối tượng từ bên ngoài lớp
         }
-        
-        public static function getInstance() {
+
+        public static function getInstance()
+        {
             if (self::$instance === null) {
                 self::$instance = new AppConfig();
             }
             return self::$instance;
         }
-        
-        public function getDBHost() {
+
+        public function getDBHost()
+        {
             return $this->dbHost;
         }
-        
-        public function getDBUser() {
+
+        public function getDBUser()
+        {
             return $this->dbUser;
         }
-        
-        public function getDBPass() {
+
+        public function getDBPass()
+        {
             return $this->dbPass;
         }
-        
-        public function getDBName() {
+
+        public function getDBName()
+        {
             return $this->dbName;
         }
     }
 }
-

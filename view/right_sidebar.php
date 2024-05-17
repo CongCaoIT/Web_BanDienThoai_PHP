@@ -138,7 +138,7 @@
                         while (!feof($file)) {
                             $word = fgets($file);
                         ?>
-                            <li><a href="#"><?php echo $word ?> </a></li>
+                            <li><a href="./search.php?keyword=<?php echo $word ?>"><?php echo $word ?> </a></li>
                         <?php
                         }
 

@@ -1,333 +1,270 @@
 <?php
-	include 'inc/header.php';
+include('./includeLibrary.php');
+
+session_start();
 ?>
 
-	<!-- hero area -->
-	<div class="hero-area hero-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
-					<div class="hero-text">
-						<div class="hero-text-tablecell">
-							<p class="subtitle">Fresh & Organic</p>
-							<h1>Delicious Seasonal Fruits</h1>
-							<div class="hero-btns">
-								<a href="shop.php" class="boxed-btn">Fruit Collection</a>
-								<a href="contact.php" class="bordered-btn">Contact Us</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end hero area -->
+<!DOCTYPE html>
+<html lang="vi">
 
-	<!-- features list section -->
-	<div class="list-section pt-80 pb-80">
-		<div class="container">
+<head>
+    <title>Trang chủ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="phone" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<div class="list-box d-flex align-items-center">
-						<div class="list-icon">
-							<i class="fas fa-shipping-fast"></i>
-						</div>
-						<div class="content">
-							<h3>Free Shipping</h3>
-							<p>When order over $75</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<div class="list-box d-flex align-items-center">
-						<div class="list-icon">
-							<i class="fas fa-phone-volume"></i>
-						</div>
-						<div class="content">
-							<h3>24/7 Support</h3>
-							<p>Get support all day</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="list-box d-flex justify-content-start align-items-center">
-						<div class="list-icon">
-							<i class="fas fa-sync"></i>
-						</div>
-						<div class="content">
-							<h3>Refund</h3>
-							<p>Get refund within 3 days!</p>
-						</div>
-					</div>
-				</div>
-			</div>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/menu.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- menu style -->
+    <link href="css/ken-burns.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- banner slider -->
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- carousel slider -->
+    <!-- //Custom Theme files -->
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <link href="//fonts.googleapis.com/css?family=Lovers+Quarrel" rel="stylesheet" type="text/css" />
+    <link href="//fonts.googleapis.com/css?family=Offside" rel="stylesheet" type="text/css" />
+    <link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet" type="text/css" />
+    <!-- web-fonts -->
+    <script src="js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#owl-demo").owlCarousel({
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+                items: 4,
+                itemsDesktop: [640, 5],
+                itemsDesktopSmall: [480, 2],
+                navigation: true,
+            });
+        });
+    </script>
+    <script src="js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            // Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
 
-		</div>
-	</div>
-	<!-- end features list section -->
+            $(".header-two").scrollToFixed();
+            // previous summary up the page.
 
-	<!-- product section -->
-	<div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Our</span> Products</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
+            var summaries = $(".summary");
+            summaries.each(function(i) {
+                var summary = $(summaries[i]);
+                var next = summaries[i + 1];
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
-						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end product section -->
+                summary.scrollToFixed({
+                    marginTop: $(".header-two").outerHeight(true) + 10,
+                    zIndex: 999,
+                });
+            });
+        });
+    </script>
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event) {
+                event.preventDefault();
+                $("html,body").animate({
+                        scrollTop: $(this.hash).offset().top
+                    },
+                    1000
+                );
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var defaults = {
+                containerID: "toTop", // fading element id
+                containerHoverID: "toTopHover", // fading element hover id
+                scrollSpeed: 1200,
+                easingType: "linear",
+            };
 
-	<!-- cart banner section -->
-	<section class="cart-banner pt-100 pb-100">
-    	<div class="container">
-        	<div class="row clearfix">
-            	<!--Image Column-->
-            	<div class="image-column col-lg-6">
-                	<div class="image">
-                    	<div class="price-box">
-                        	<div class="inner-price">
-                                <span class="price">
-                                    <strong>30%</strong> <br> off per kg
-                                </span>
-                            </div>
-                        </div>
-                    	<img src="assets/img/a.jpg" alt="">
-                    </div>
+            $().UItoTop({
+                easingType: "easeOutQuart"
+            });
+        });
+    </script>
+    <!-- //smooth-scrolling-of-move-up -->
+    <script src="js/bootstrap.js"></script>
+</head>
+
+<body>
+    <!-- Model giới thiệu -->
+    <?php include('./model_introduce.php'); ?>
+
+    <!-- Header -->
+    <?php include('./header.php'); ?>
+
+    <!-- Banner -->
+    <?php include('./banner.php'); ?>
+
+    <!-- Welcome -->
+    <?php include('./welcome.php'); ?>
+
+    <!-- add-products -->
+    <div class="add-products">
+        <div class="container">
+            <div class="add-products-row">
+                <div class="w3ls-add-grids">
+                    <a href="#">
+                        <h4>
+                            Trải nghiệm không giới hạn cùng <span>iPhone</span>.
+                        </h4>
+                        <h6>
+                            Đến ngay
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        </h6>
+                    </a>
                 </div>
-                <!--Content Column-->
-                <div class="content-column col-lg-6">
-					<h3><span class="orange-text">Deal</span> of the month</h3>
-                    <h4>Hikan Strwaberry</h4>
-                    <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant</div>
-                    <!--Countdown Timer-->
-                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
-                	<a href="cart.php" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                <div class="w3ls-add-grids w3ls-add-grids-mdl">
+                    <a href="#">
+                        <h4>
+                            Khám phá sức mạnh đỉnh cao với
+                            <span>Samsung</span>.
+                        </h4>
+                        <h6>
+                            Đến ngay
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        </h6>
+                    </a>
                 </div>
+                <div class="w3ls-add-grids w3ls-add-grids-mdl1">
+                    <a href="#">
+                        <h4>
+                            Kết nối sáng tạo, trải nghiệm đỉnh cao cùng <span> OPPO</span>.
+                        </h4>
+                        <h6>
+                            Đến ngay
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        </h6>
+                    </a>
+                </div>
+                <div class="clerfix"></div>
             </div>
         </div>
-    </section>
-    <!-- end cart banner section -->
+    </div>
 
-	<!-- testimonail-section -->
-	<div class="testimonail-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1 text-center">
-					<div class="testimonial-sliders">
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar1.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Saira Hakim <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar2.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>David Niph <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar3.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Jacob Sikim <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end testimonail-section -->
-	
-	<!-- advertisement section -->
-	<div class="abt-section mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-text">
-						<p class="top-sub">Since Year 1999</p>
-						<h2>We are <span class="orange-text">Fruitkha</span></h2>
-						<p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet sapien sed, interdum velit. Nam eu molestie lorem.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat veritatis minus, et labore minima mollitia qui ducimus.</p>
-						<a href="about.php" class="boxed-btn mt-4">know more</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end advertisement section -->
-	
-	<!-- shop banner -->
-	<section class="shop-banner">
-    	<div class="container">
-        	<h3>December sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
-            <div class="sale-percent"><span>Sale! <br> Upto</span>50% <span>off</span></div>
-            <a href="shop.php" class="cart-btn btn-lg">Shop Now</a>
+    <!-- coming soon -->
+    <div class="soon">
+        <div class="container">
+            <h3>Ưu đãi lớn trong tuần</h3>
+            <h4>Sắp ra mắt, đừng bỏ lỡ!!!</h4>
+            <div id="countdown1" class="ClassyCountdownDemo"></div>
         </div>
-    </section>
-	<!-- end shop banner -->
+    </div>
 
-	<!-- latest news -->
-	<div class="latest-news pt-150 pb-150">
-		<div class="container">
+    <!-- Deal -->
+    <?php include('./deal.php'); ?>
 
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Our</span> News</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
+    <!-- Footer -->
+    <?php include('./footer.php'); ?>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.php"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.php">You will vainly look for fruit on it in autumn.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.php" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.php"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.php">A man's worth has its season, like tomato.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.php" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.php"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.php">Good thoughts bear good fresh juicy fruit.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.php" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<a href="news.php" class="boxed-btn">More News</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end latest news -->
+    <!-- cart-js -->
+    <!-- <script src="js/minicart.js"></script>
+    <script>
+        w3ls.render();
 
-	<!-- logo carousel -->
-	<div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/1.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/2.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/3.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/4.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/5.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end logo carousel -->
+        w3ls.cart.on("w3sb_checkout", function(evt) {
+            var items, len, i;
 
-<?php
-	include 'inc/footer.php';
-?>
+            if (this.subtotal() > 0) {
+                items = this.items();
+
+                for (i = 0, len = items.length; i < len; i++) {
+                    items[i].set("shipping", 0);
+                    items[i].set("shipping2", 0);
+                }
+            }
+        });
+    </script> -->
+
+    <!-- countdown.js -->
+    <script src="js/jquery.knob.js"></script>
+    <script src="js/jquery.throttle.js"></script>
+    <script src="js/jquery.classycountdown.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#countdown1").ClassyCountdown({
+                end: "1388268325",
+                now: "1387999995",
+                labels: true,
+                style: {
+                    element: "",
+                    textResponsive: 0.5,
+                    days: {
+                        gauge: {
+                            thickness: 0.1,
+                            bgColor: "rgba(0,0,0,0)",
+                            fgColor: "#1abc9c",
+                            lineCap: "round",
+                        },
+                        textCSS: "font-weight:300; color:#fff;",
+                    },
+                    hours: {
+                        gauge: {
+                            thickness: 0.1,
+                            bgColor: "rgba(0,0,0,0)",
+                            fgColor: "#05BEF6",
+                            lineCap: "round",
+                        },
+                        textCSS: " font-weight:300; color:#fff;",
+                    },
+                    minutes: {
+                        gauge: {
+                            thickness: 0.1,
+                            bgColor: "rgba(0,0,0,0)",
+                            fgColor: "#8e44ad",
+                            lineCap: "round",
+                        },
+                        textCSS: " font-weight:300; color:#fff;",
+                    },
+                    seconds: {
+                        gauge: {
+                            thickness: 0.1,
+                            bgColor: "rgba(0,0,0,0)",
+                            fgColor: "#f39c12",
+                            lineCap: "round",
+                        },
+                        textCSS: " font-weight:300; color:#fff;",
+                    },
+                },
+                onEndCallback: function() {
+                    console.log("Time out!");
+                },
+            });
+        });
+    </script>
+
+    <!-- menu js aim -->
+    <script src="js/jquery.menu-aim.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Resource jQuery -->
+    <!-- //menu js aim -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+</body>
+
+</html>

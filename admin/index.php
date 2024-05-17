@@ -1,7 +1,53 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 $onlineUsers = Session::countOnlineUsers();
+
+// Helper function to format date
+function formatDate($date)
+{
+	$dateObj = new DateTime($date);
+	return $dateObj->format('d/m/Y'); // Desired format: day/month/year
+}
+
+// Helper function to format price
+function formatPrice($price)
+{
+	return number_format($price, 0, ',', '.') . ' VND'; // Format with thousands separator and currency
+}
+
+$dh = new donHang();
+// Gọi hàm showDonDatHang() để lấy mảng đơn hàng đã hoàn thành
+$completedOrders = $dh->showDonDatHang();
+
+$totalRevenue = 0;
+$totalOrders = count($completedOrders);
+
+// Loop through completed orders to calculate total revenue
+foreach ($completedOrders as $order) {
+	$totalRevenue += $order->getThanhTien();
+}
+
+// Group orders by order ID
+$groupedOrders = [];
+foreach ($completedOrders as $order) {
+	$maDDH = $order->getMaDDH();
+	if (!isset($groupedOrders[$maDDH])) {
+		$groupedOrders[$maDDH] = [
+			'maDDH' => $order->getMaDDH(),
+			'maTV' => $order->getMaTV(),
+			'ngayDatHang' => $order->getNgayDatHang(),
+			'ngayGiao' => $order->getNgayGiao(),
+			'sanPham' => [],
+		];
+	}
+	$groupedOrders[$maDDH]['sanPham'][] = [
+		'tenSP' => $order->getTenSP(),
+		'soLuongNhap' => $order->getSoLuongNhap(),
+		'donGia' => $order->getDonGia(),
+		'thanhTien' => $order->getThanhTien(),
+	];
+}
 ?>
 
 <!--main content start-->
@@ -40,7 +86,7 @@ $onlineUsers = Session::countOnlineUsers();
 						<i class="fa fa-usd"></i>
 					</div>
 					<div class="col-md-8 market-update-left">
-						<h4>0đ</h4>
+						<h4><?php echo formatPrice($totalRevenue); ?></h4>
 						<p>Tổng doanh thu</p>
 					</div>
 					<div class="clearfix"> </div>
@@ -52,7 +98,7 @@ $onlineUsers = Session::countOnlineUsers();
 						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 					</div>
 					<div class="col-md-8 market-update-left">
-						<h4>0</h4>
+						<h4><?php echo $totalOrders; ?></h4>
 						<p>Tổng đơn hàng</p>
 					</div>
 					<div class="clearfix"> </div>
@@ -79,35 +125,42 @@ $onlineUsers = Session::countOnlineUsers();
 					</thead>
 					<tbody>
 						<?php
-						$dh = new donHang();
-						// Gọi hàm showDonDatHang() để lấy mảng đơn hàng đã hoàn thành
-						$completedOrders = $dh->showDonDatHang();
-
 						// Kiểm tra xem mảng có dữ liệu hay không
-						if (!empty($completedOrders)) {
+						if (!empty($groupedOrders)) {
 							// Xác định trang hiện tại
 							$page = isset($_GET['page']) ? $_GET['page'] : 1;
 							// Số lượng bản ghi trên mỗi trang
-							$recordsPerPage = 2;
+							$recordsPerPage = 10;
 							// Tính chỉ số bắt đầu và kết thúc của các bản ghi trên trang hiện tại
 							$startIndex = ($page - 1) * $recordsPerPage;
-							$endIndex = min($startIndex + $recordsPerPage - 1, count($completedOrders) - 1);
+							$endIndex = min($startIndex + $recordsPerPage - 1, count($groupedOrders) - 1);
 
 							// Lặp qua mỗi đơn hàng trong mảng và hiển thị thông tin vào các thẻ td
-							for ($i = $startIndex; $i <= $endIndex; $i++) {
-								$donDatHang = $completedOrders[$i];
+							$i = 0;
+							foreach ($groupedOrders as $maDDH => $order) {
+								if ($i >= $startIndex && $i <= $endIndex) {
+									$sanPhamCount = count($order['sanPham']);
+									$isFirstRow = true; // Check if it's the first row for rowspan
+
+									foreach ($order['sanPham'] as $sanPham) {
 						?>
-								<tr>
-									<td><?php echo $donDatHang->getMaDDH(); ?></td>
-									<td><?php echo $donDatHang->getMaTV(); ?></td>
-									<td><?php echo $donDatHang->getNgayDatHang(); ?></td>
-									<td><?php echo $donDatHang->getNgayGiao(); ?></td>
-									<td><?php echo $donDatHang->getTenSP(); ?></td>
-									<td><?php echo $donDatHang->getSoLuongNhap(); ?></td>
-									<td><?php echo $donDatHang->getDonGia(); ?></td>
-									<td><?php echo $donDatHang->getThanhTien(); ?></td>
-								</tr>
+										<tr>
+											<?php if ($isFirstRow) { ?>
+												<td rowspan="<?php echo $sanPhamCount; ?>"><?php echo $order['maDDH']; ?></td>
+												<td rowspan="<?php echo $sanPhamCount; ?>"><?php echo $order['maTV']; ?></td>
+												<td rowspan="<?php echo $sanPhamCount; ?>"><?php echo formatDate($order['ngayDatHang']); ?></td>
+												<td rowspan="<?php echo $sanPhamCount; ?>"><?php echo formatDate($order['ngayGiao']); ?></td>
+											<?php } ?>
+											<td><?php echo $sanPham['tenSP']; ?></td>
+											<td><?php echo $sanPham['soLuongNhap']; ?></td>
+											<td><?php echo formatPrice($sanPham['donGia']); ?></td>
+											<td><?php echo formatPrice($sanPham['thanhTien']); ?></td>
+										</tr>
 						<?php
+										$isFirstRow = false; // Set to false after the first iteration
+									}
+								}
+								$i++;
 							}
 						} else {
 							echo "<tr><td colspan='8'>Không có đơn hàng</td></tr>";
@@ -122,7 +175,7 @@ $onlineUsers = Session::countOnlineUsers();
 				<div class="col-12 text-center pagination">
 					<?php
 					// Tính tổng số trang
-					$totalPages = ceil(count($completedOrders) / $recordsPerPage);
+					$totalPages = ceil(count($groupedOrders) / $recordsPerPage);
 
 					// Hiển thị nút "prev" nếu không phải trang đầu tiên
 					if ($page > 1) {
@@ -151,145 +204,68 @@ $onlineUsers = Session::countOnlineUsers();
 		?>
 		<!--main content end-->
 	</section>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="js/scripts.js"></script>
-	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.nicescroll.js"></script>
-	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-	<script src="js/jquery.scrollTo.js"></script>
-	<!-- morris JavaScript -->
-	<script>
-		$(document).ready(function() {
-			//BOX BUTTON SHOW AND CLOSE
-			jQuery('.small-graph-box').hover(function() {
-				jQuery(this).find('.box-button').fadeIn('fast');
-			}, function() {
-				jQuery(this).find('.box-button').fadeOut('fast');
-			});
-			jQuery('.small-graph-box .box-close').click(function() {
-				jQuery(this).closest('.small-graph-box').fadeOut(200);
-				return false;
-			});
+</section>
 
-			//CHARTS
-			function gd(year, day, month) {
-				return new Date(year, month - 1, day).getTime();
-			}
+<!-- Jquery -->
+<script src="js/jquery2.0.3.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Scripts -->
+<script src="js/scripts.js"></script>
+<script src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/jquery.scrollTo.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="js/raphael-min.js"></script>
+<script src="js/morris.js"></script>
+<script>
+	$(document).ready(function() {
+		//BOX BUTTON SHOW AND CLOSE
+		jQuery('.small-graph-box').hover(function() {
+			jQuery(this).find('.box-button').fadeIn('fast');
+		}, function() {
+			jQuery(this).find('.box-button').fadeOut('fast');
+		});
+		jQuery('.small-graph-box .box-close').click(function() {
+			jQuery(this).closest('.small-graph-box').fadeOut(200);
+			return false;
+		});
+	});
+</script>
+<!-- calendar -->
+<script type="text/javascript" src="js/monthly.js"></script>
+<script type="text/javascript">
+	$(window).load(function() {
 
-			graphArea2 = Morris.Area({
-				element: 'hero-area',
-				padding: 10,
-				behaveLikeLine: true,
-				gridEnabled: false,
-				gridLineColor: '#dddddd',
-				axes: true,
-				resize: true,
-				smooth: true,
-				pointSize: 0,
-				lineWidth: 0,
-				fillOpacity: 0.85,
-				data: [{
-						period: '2015 Q1',
-						iphone: 2668,
-						ipad: null,
-						itouch: 2649
-					},
-					{
-						period: '2015 Q2',
-						iphone: 15780,
-						ipad: 13799,
-						itouch: 12051
-					},
-					{
-						period: '2015 Q3',
-						iphone: 12920,
-						ipad: 10975,
-						itouch: 9910
-					},
-					{
-						period: '2015 Q4',
-						iphone: 8770,
-						ipad: 6600,
-						itouch: 6695
-					},
-					{
-						period: '2016 Q1',
-						iphone: 10820,
-						ipad: 10924,
-						itouch: 12300
-					},
-					{
-						period: '2016 Q2',
-						iphone: 9680,
-						ipad: 9010,
-						itouch: 7891
-					},
-					{
-						period: '2016 Q3',
-						iphone: 4830,
-						ipad: 3805,
-						itouch: 1598
-					},
-					{
-						period: '2016 Q4',
-						iphone: 15083,
-						ipad: 8977,
-						itouch: 5185
-					},
-					{
-						period: '2017 Q1',
-						iphone: 10697,
-						ipad: 4470,
-						itouch: 2038
-					},
-
-				],
-				lineColors: ['#eb6f6f', '#926383', '#eb6f6f'],
-				xkey: 'period',
-				redraw: true,
-				ykeys: ['iphone', 'ipad', 'itouch'],
-				labels: ['All Visitors', 'Returning Visitors', 'Unique Visitors'],
-				pointSize: 2,
-				hideHover: 'auto',
-				resize: true
-			});
-
+		$('#mycalendar').monthly({
+			mode: 'event',
 
 		});
-	</script>
-	<!-- calendar -->
-	<script type="text/javascript" src="js/monthly.js"></script>
-	<script type="text/javascript">
-		$(window).load(function() {
 
-			$('#mycalendar').monthly({
-				mode: 'event',
-
-			});
-
-			$('#mycalendar2').monthly({
-				mode: 'picker',
-				target: '#mytarget',
-				setWidth: '250px',
-				startHidden: true,
-				showTrigger: '#mytarget',
-				stylePast: true,
-				disablePast: true
-			});
-
-			switch (window.location.protocol) {
-				case 'http:':
-				case 'https:':
-					// running on a server, should be good.
-					break;
-				case 'file:':
-					alert('Just a heads-up, events will not work when run locally.');
-			}
-
+		$('#mycalendar2').monthly({
+			mode: 'picker',
+			target: '#mytarget',
+			setWidth: '250px',
+			startHidden: true,
+			showTrigger: '#mytarget',
+			stylePast: true,
+			disablePast: true
 		});
-	</script>
-	<!-- //calendar -->
-	</body>
 
-	</html>
+		switch (window.location.protocol) {
+			case 'http:':
+			case 'https:':
+				// running on a server, should be good.
+				break;
+			case 'file:':
+				alert('Just a heads-up, events will not work when run locally.');
+		}
+
+	});
+</script>
+<!-- //calendar -->
+</body>
+
+</html>
