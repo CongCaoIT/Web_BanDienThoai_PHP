@@ -19,6 +19,7 @@ class ThanhVien
 
     public function __construct($thanhVien = null, $maTV = null, $maLoaiTV = null, $taiKhoan = null, $matKhau = null, $hoTen = null, $diaChi = null, $email = null, $sdt = null, $cauHoi = null, $cauTraLoi = null, $hinhDaiDien = null, $maToken = null, $thoiGianMaToken = null)
     {
+        $this->ltv = new LoaiThanhVien();
         if ($thanhVien !== null) {
             $this->maTV = $thanhVien['MaTV'];
             $this->maLoaiTV = $thanhVien['MaLoaiTV'];

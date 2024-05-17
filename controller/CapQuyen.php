@@ -14,43 +14,51 @@ class CapQuyen
 
     public function showTTTV()
     {
-        $Result = $this->db->callProcedure('GetMembersWithTypes');
+        $query = "SELECT thanhvien.MaTV, loaithanhvien.TenLoai, thanhvien.HoTen, thanhvien.Email, thanhvien.SoDienThoai 
+        FROM thanhvien
+        JOIN loaithanhvien ON thanhvien.MaLoaiTV = loaithanhvien.MaLoaiTV;";
 
-        if ($Result) {
-            while ($row = $Result->fetch_assoc()) {
-                $dh = new ThanhVien();
-                $dh->setMaTV($row['MaTV']);
-                $dh->setTaiKhoan($row['TaiKhoan']);
-                $dh->setEmail($row['Email']);
-                $dh->setSdt($row['SoDienThoai']);
-                $dh->ltv->setTenLoai($row['TenLoai']);
-                $completed[] = $dh;
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $dsThanhVien = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $tv = new ThanhVien();
+                $tv->setMaTV($row['MaTV']);
+                $tv->setHoTen($row['HoTen']);
+                $tv->setEmail($row['Email']);
+                $tv->setSdt($row['SoDienThoai']);
+                $tv->ltv->setTenLoai($row['TenLoai']);
+                $dsThanhVien[] = $tv;
             }
         }
-        return $completed;
+        return $dsThanhVien;
     }
 
     public function getTTThanhVien(int $ma)
     {
-        $this->fm->validation($ma);
+        $query = "SELECT MaTV, HoTen, MaLoaiTV
+        FROM thanhvien
+        WHERE MaTV = ?;";
 
-        $statement = $this->db->prepare("CALL GetMemberById(?)");
-        $statement->bind_param("i", $ma);
-        $statement->execute();
-        $result = $statement->get_result();
-
-        $DSResults = array();
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $ma);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $dsTV = array();
 
         while ($row = $result->fetch_assoc()) {
             $dh = new ThanhVien();
             $dh->setMaTV($row['MaTV']);
-            $dh->setTaiKhoan($row['TaiKhoan']);
+            $dh->setHoTen($row['HoTen']);
             $dh->ltv->setMaLoaiTV($row['MaLoaiTV']);
 
-            $DSResults[] = $dh;
+            $dsTV[] = $dh;
         }
 
-        return $DSResults;
+        return $dsTV;
     }
 
     public function capNhatQuyen($ma, $quyn)

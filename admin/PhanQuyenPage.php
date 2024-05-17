@@ -1,6 +1,6 @@
 <?php
-include ('../admin/inc/header.php');
-include ('../admin/inc/sidebar.php');
+include('../admin/inc/header.php');
+include('../admin/inc/sidebar.php');
 
 // Đảm bảo rằng biến $page được khởi tạo
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -34,7 +34,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                             $dh = new CapQuyen();
                             $ds = $dh->showTTTV();
 
-                            $recordsPerPage = 2;
+                            $recordsPerPage = 10;
                             if (!empty($ds)) {
                                 $startIndex = ($page - 1) * $recordsPerPage;
                                 $endIndex = min($startIndex + $recordsPerPage - 1, count($ds) - 1);
@@ -45,17 +45,15 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                     <tr>
                                         <?php $ma = $km->getMaTV(); ?>
                                         <td><?php echo $ma; ?></td>
-                                        <td><?php echo $km->getTaiKhoan(); ?></td>
-                                        <td><?php echo $km->getEmail(); ?></td>
-                                        <td><?php echo $km->getSdt(); ?></td>
                                         <td><?php echo $km->ltv->getTenLoai(); ?></td>
+                                        <td><?php echo $km->getHoTen(); ?></td>
+                                        <td><?php echo $km->getEmail(); ?></td>
+                                        <td><?php echo  $km->getSdt(); ?></td>
                                         <td>
-                                            <button class="btn btn-primary" onclick="window.location.href='capquyn.php?id=<?php echo $ma; ?>'">
+                                            <button class="btn btn-primary" onclick="window.location.href='capquyen.php?ma=<?php echo $ma; ?>'">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> CẤP QUYỀN
                                             </button>
                                         </td>
-
-
                                     </tr>
                             <?php
                                 }

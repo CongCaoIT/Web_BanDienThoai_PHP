@@ -148,10 +148,10 @@ $jsonDataProvider = json_encode($dataProvider);
 <script src="../admin/charts/js/utils.js"></script>
 
 <script>
-    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var MONTHS = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
     var color = Chart.helpers.color;
     var barChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
         datasets: [{
             label: 'Dataset 1',
             backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
@@ -417,6 +417,21 @@ $jsonDataProvider = json_encode($dataProvider);
             parseDates: true,
             dashLength: 1,
             minorGridEnabled: true,
+            dateFormats: [{
+                period: "DD",
+                format: "DD/MM"
+            }, {
+                period: "WW",
+                format: "DD/MM"
+            }, {
+                period: "MM",
+                format: "MM/YYYY"
+            }, {
+                period: "YYYY",
+                format: "YYYY"
+            }],
+            monthNames: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
         },
         legend: {
             useGraphSettings: true,
@@ -431,4 +446,6 @@ $jsonDataProvider = json_encode($dataProvider);
         },
         dataProvider: <?php echo $jsonDataProvider; ?>
     });
+</script>
+
 </script>
