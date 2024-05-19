@@ -31,7 +31,6 @@ class adminlogin
             return $alert;
         } else {
             $maHoa = new MaHoa(); // Tạo một đối tượng mới của lớp MaHoa
-            $adminUser = $maHoa->ma_hoa_md5($this->tv->getTaiKhoan());
             $adminPass = $maHoa->ma_hoa_md5($this->tv->getMatKhau()); // Mã hóa mật khẩu sử dụng hàm ma_hoa_md5()
 
             $query = "SELECT * FROM thanhvien WHERE TaiKhoan = '$adminUser' AND MatKhau = '$adminPass' LIMIT 1";

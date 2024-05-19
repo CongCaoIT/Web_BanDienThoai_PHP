@@ -12,7 +12,11 @@
                     <?php
                     if (isset($_SESSION['login'])) {
                         $member = $_SESSION['login'];
-                        echo $member->getTaiKhoan();
+                        if ($member->getHoTen() != null) {
+                            echo $member->getHoTen();
+                        } else {
+                            echo 'Tài khoản của tôi';
+                        }
                     } else {
                         echo 'Tài khoản của tôi';
                     }

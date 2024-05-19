@@ -1,4 +1,5 @@
 <?php
+include '../model/MaHoa.php';
 class Member
 {
     public static function checkUsernameAlreadyExists($username)
@@ -25,9 +26,12 @@ class Member
 
     public static function addMember($username, $email, $password)
     {
+        $maHoa = new MaHoa();
+        $hasPass = $maHoa->ma_hoa_md5($password);
+
         $sql = "INSERT INTO thanhvien VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $db = new Database();
-        $result = $db->query($sql, [null, 2, $username, $password, null, null, $email, null, null, null, null, null, null]);
+        $result = $db->query($sql, [null, 2, $username, $hasPass, null, null, $email, null, null, null, null, null, null]);
         if ($result == true) {
             return true;
         }
@@ -36,10 +40,13 @@ class Member
 
     public static function getMemberByUsernameAndPassword($username, $password)
     {
+        $maHoa = new MaHoa();
+        $hasPass = $maHoa->ma_hoa_md5($password);
+
         $member = null;
         $sql = "SELECT * FROM thanhvien WHERE TaiKhoan = ? AND MatKhau = ? AND MaLoaiTV = 2";
         $db = new Database();
-        $result = $db->fetch($sql, [$username, $password]);
+        $result = $db->fetch($sql, [$username, $hasPass]);
         if ($result != false) {
             $member = new ThanhVien($result);
         }
@@ -76,9 +83,12 @@ class Member
 
     public static function updatePasswordByMemberId($memberId, $password)
     {
+        $maHoa = new MaHoa();
+        $hasPass = $maHoa->ma_hoa_md5($password);
+
         $sql = "UPDATE thanhvien SET MatKhau = ? WHERE MaTV = ?";
         $db = new Database();
-        $result = $db->query($sql, [$password, $memberId]);
+        $result = $db->query($sql, [$hasPass, $memberId]);
         return $result;
     }
 }
