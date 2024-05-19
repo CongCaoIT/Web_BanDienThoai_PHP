@@ -29,8 +29,8 @@ CREATE TABLE THANHVIEN
     MaTV INT AUTO_INCREMENT PRIMARY KEY,
     MaLoaiTV INT NULL,
     TaiKhoan TEXT NOT NULL,
-    MatKhau TEXT NOT NULL,
-    HoTen TEXT NOT NULL,
+    MatKhau TEXT NOT NULL, 
+    HoTen TEXT NULL,
     DiaChi TEXT NULL,
     Email TEXT NULL,
     SoDienThoai VARCHAR(12) NULL,
@@ -46,7 +46,6 @@ CREATE TABLE THANHVIEN
 CREATE TABLE LOAISANPHAM
 (
     MaLoaiSP INT AUTO_INCREMENT PRIMARY KEY,
-    MaDanhMuc INT NOT NULL,
     TenLoaiSP TEXT NOT NULL,
     Icon TEXT NULL,
     BiDanh TEXT NULL
@@ -60,6 +59,23 @@ CREATE TABLE KHUYENMAI
     PhanTramGiamGia INT NOT NULL,
     NgayBatDau DATE NOT NULL,
     NgayKetThuc DATE NOT NULL
+);
+
+CREATE TABLE THONGTINDATHANG
+(
+    MaTTDH INT AUTO_INCREMENT PRIMARY KEY,
+    HoTen TEXT NOT NULL,
+    SDT TEXT NULL,
+    Email TEXT NULL,
+    DiaChiGiaoHang TEXT NULL
+);
+
+CREATE TABLE QUANGCAO
+(
+    MaQuangCao INT AUTO_INCREMENT PRIMARY KEY,
+    TieuDe TEXT NULL,
+    NoiDung TEXT NULL,
+    HinhAnh TEXT NULL
 );
 
 CREATE TABLE SANPHAM
@@ -88,16 +104,38 @@ CREATE TABLE SANPHAM
 	CONSTRAINT FK_SP_KM FOREIGN KEY(MaKhuyenMai) REFERENCES KHUYENMAI(MaKhuyenMai)
 );
 
+CREATE TABLE MAU
+(
+    MaMau INT AUTO_INCREMENT PRIMARY KEY,
+    TenMau TEXT NULL
+);
+
+CREATE TABLE SANPHAM_MAU
+(
+     MaSP_Mau INT AUTO_INCREMENT PRIMARY KEY,
+     MaSP INT NOT NULL,
+     SoLuongTon INT NOT NULL,
+     MaMau INT NOT NULL,
+
+     CONSTRAINT FK_SPMAU_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP),
+     CONSTRAINT FK_SPMAU_MAU FOREIGN KEY(MaMau) REFERENCES MAU(MaMau)
+);
+
 CREATE TABLE CHITIETPHIEUNHAP
 (
     MaCTPN INT AUTO_INCREMENT PRIMARY KEY,
     MaPN INT NOT NULL,
     MaSP INT NOT NULL,
+    MaMau1 INT NULL,
+    MaMau2 INT NULL,
     DonGiaNhap DECIMAL(18,0) NOT NULL,
-    SoLuongNhap INT NOT NULL,
+    SoLuongNhapMau1 INT NULL,
+    SoLuongNhapMau2 INT NULL,
 
     CONSTRAINT FK_CTPN_PN FOREIGN KEY(MaPN) REFERENCES PHIEUNHAP(MaPN),
-    CONSTRAINT FK_CTPN_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP)
+    CONSTRAINT FK_CTPN_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP),
+    CONSTRAINT FK_CTPN_MAU1 FOREIGN KEY(MaMau1) REFERENCES MAU(MaMau),
+    CONSTRAINT FK_CTPN_MAU2 FOREIGN KEY(MaMau2) REFERENCES MAU(MaMau)
 );
 
 CREATE TABLE DONDATHANG
@@ -110,8 +148,11 @@ CREATE TABLE DONDATHANG
     QuaTang TEXT NULL,
     TinhTrang TEXT NULL,
     DaXoa TINYINT DEFAULT 0 NULL,
+    thanhTien DECIMAL(18,0) NULL,
+    MaTTDH INT NOT NULL,
 
-    CONSTRAINT FK_DDH_TV FOREIGN KEY(MaTV) REFERENCES THANHVIEN(MaTV)
+    CONSTRAINT FK_DDH_TV FOREIGN KEY(MaTV) REFERENCES THANHVIEN(MaTV),
+    CONSTRAINT FK_DDH_TTDDH FOREIGN KEY(MaTTDH) REFERENCES THONGTINDATHANG(MaTTDH)
 );
 
 CREATE TABLE CHITIETDONDATHANG
@@ -119,12 +160,13 @@ CREATE TABLE CHITIETDONDATHANG
     MaChiTietDDH INT AUTO_INCREMENT PRIMARY KEY,
     MaDDH INT NOT NULL,
     MaSP INT NOT NULL,
-    TenSP TEXT NOT NULL,
     SoLuong INT NOT NULL,
     DonGia DECIMAL(18,0) NOT NULL,
+    MaMau INT NOT NULL,
 
     CONSTRAINT FK_CTDDH_DDH FOREIGN KEY(MaDDH) REFERENCES DONDATHANG(MaDDH),
-    CONSTRAINT FK_CTDDH_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP)
+    CONSTRAINT FK_CTDDH_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP),
+    CONSTRAINT FK_CTDDH_MAU FOREIGN KEY(MaMau) REFERENCES MAU(MaMau)
 );
 
 CREATE TABLE CHITIETSANPHAM
@@ -166,23 +208,6 @@ CREATE TABLE CHITIETSANPHAM
     CONSTRAINT FK_CTSP_SANPHAM FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP)
 );
 
-CREATE TABLE MAU
-(
-    MaMau INT AUTO_INCREMENT PRIMARY KEY,
-    TenMau TEXT NULL
-);
-CREATE TABLE SANPHAM_MAU
-(
-     MaSP_Mau INT AUTO_INCREMENT PRIMARY KEY,
-     MaSP INT NOT NULL,
-     SoLuongTon INT NOT NULL,
-     MaMau INT NOT NULL,
-
-     CONSTRAINT FK_SPMAU_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP),
-     CONSTRAINT FK_SPMAU_MAU FOREIGN KEY(MaMau) REFERENCES MAU(MaMau)
-);
-
-
 CREATE TABLE GIOHANG
 (
     MaGioHang INT AUTO_INCREMENT PRIMARY KEY,
@@ -199,9 +224,11 @@ CREATE TABLE CHITIETGIOHANG
     SoLuong INT NOT NULL,
     DonGia DECIMAL(18,0) NOT NULL,
     MaMau INT NOT NULL,
+    DatHang BIT,
 
     CONSTRAINT FK_CTGH_GH FOREIGN KEY(MaGioHang) REFERENCES GIOHANG(MaGioHang),
-    CONSTRAINT FK_CTGH_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP)
+    CONSTRAINT FK_CTGH_SP FOREIGN KEY(MaSP) REFERENCES SANPHAM(MaSP),
+    CONSTRAINT FK_CTGH_MAU FOREIGN KEY(MaMau) REFERENCES MAU(MaMau)
 );
 
 INSERT INTO NHACUNGCAP (TenNCC, DiaChi, Email, SoDienThoai) VALUES 
@@ -214,20 +241,17 @@ INSERT INTO NHACUNGCAP (TenNCC, DiaChi, Email, SoDienThoai) VALUES
 
 INSERT INTO LOAITHANHVIEN (TenLoai, UuDai) VALUES 
 ('Admin', null),
-('Khách hàng ', null);
+('Khách hàng', null);
 
 INSERT INTO THANHVIEN (MaLoaiTV, TaiKhoan, MatKhau, HoTen, DiaChi, Email, SoDienThoai, CauHoi, CauTraLoi, HinhDaiDien, MaToken, ThoiGianMaToken) VALUES
-(1, 'admin', '1', 'Nguyễn Văn A', 'Địa chỉ A', 'email1@example.com', '0123456789', null, null, 'avatar1.png', NULL, NULL),
-(2, 'taopro', '1', 'Trần Thị B', 'Địa chỉ B', 'email2@example.com', '0987654321', null, null, 'avatar2.png', NULL, NULL);
+(1, '21232f297a57a5a743894a0e4a801fc3', 'c4ca4238a0b923820dcc509a6f75849b', 'Nguyễn Văn A', 'Địa chỉ A', 'email1@example.com', '0123456789', null, null, 'avatar1.png', NULL, NULL);
 
-INSERT INTO LOAISANPHAM(MaDanhMuc, TenLoaiSP, Icon, BiDanh) VALUES
-(1, N'Iphone', N'logo-iphone-220x48.png', null),
-(1, N'Oppo', N'OPPO42-b_5.jpg', null),
-(1, N'Vivo', N'vivo-logo-220-220x48-3.png', null),
-(1, N'Samsung', N'samsungnew-220x48-1.png', null),
-(1, N'Xiaomi', N'logo-xiaomi-220x48-5.png', null),
-(2, N'Sạc dự phòng', null, null),
-(2, N'Tai nghe', null, null);
+INSERT INTO LOAISANPHAM(TenLoaiSP, Icon, BiDanh) VALUES
+(N'Iphone', N'iphone_icon.png', null),
+(N'Oppo', N'oppo_icon.png', null),
+(N'Vivo', N'vivo_icon.png', null),
+(N'Samsung', N'samsung_icon.png', null),
+(N'Xiaomi', N'xiaomi_icon.png', null);
 
 INSERT INTO SANPHAM(MaNCC, MaLoaiSP, MaKhuyenMai, TenSP, DonGia, NgayCapNhat, MoTa, HinhAnh, HinhAnh2, HinhAnh3, LuotXem, LuotBinhChon, LuotBinhLuan, SoLanMua, Moi, DaXoa) VALUES
 (1, 1, NULL, N'Điện thoại iPhone 14 Pro Max 128GB', NULL, '2023-08-01', N'iPhone 14 Pro Max một siêu phẩm trong giới smartphone được nhà Táo tung ra thị trường vào tháng 09/2022. Máy trang bị con chip Apple A16 Bionic vô cùng mạnh mẽ, đi kèm theo đó là thiết kế hình màn hình mới, hứa hẹn mang lại những trải nghiệm đầy mới mẻ cho người dùng iPhone.', N'iphone-14-pro-max-purple-1.jpg', N'iphone-14-pro-max-vang-1.jpg', N'iphone-14-pro-max-note.jpg',  null, null, null, 0, 1, 0),
@@ -292,6 +316,11 @@ INSERT INTO MAU(TenMau) VALUES
 (N'Xám'), 
 (N'Hồng'),
 (N'Cam');
+
+INSERT INTO QUANGCAO(TieuDe, NoiDung, HinhAnh) VALUES
+(N'Giảm giá sốc', N'Hàng ngàn ưu đãi tại đây', N'banner1.jpg'),
+(N'Chính hãng, mới nhất', N'Chính hãng, mới nhất', N'banner2.jpg'),
+(N'Miễn phí vận chuyển', N'Miễn phí vận chuyển đối với tất cả các sản phẩm', N'banner3.jpg');
 
 INSERT INTO SANPHAM_MAU(MaSP, SoLuongTon, MaMau) VALUES
 (1, 10, 5), 
