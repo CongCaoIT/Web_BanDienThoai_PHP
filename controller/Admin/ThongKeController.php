@@ -20,12 +20,21 @@ class ThongKeAdmin
         DONDATHANG ddh
     JOIN 
         CHITIETDONDATHANG ctdh ON ddh.MaDDH = ctdh.MaDDH
-    JOIN
-        CHITIETPHIEUNHAP ctpn ON ctdh.MaSP = ctpn.MaSP
+    JOIN (
+        SELECT 
+            MaSP,
+            MAX(MaCTPN) AS MaCTPN,
+            DonGiaNhap
+        FROM 
+            CHITIETPHIEUNHAP
+        GROUP BY 
+            MaSP
+    ) ctpn ON ctdh.MaSP = ctpn.MaSP
     GROUP BY 
         DATE_FORMAT(ddh.NgayDatHang, '%Y-%m-%d')
     ORDER BY 
-        Ngay;";
+        Ngay;
+    ";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute();

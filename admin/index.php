@@ -175,22 +175,23 @@ foreach ($completedOrders as $order) {
 				<div class="col-12 text-center pagination">
 					<?php
 					// Tính tổng số trang
-					$totalPages = ceil(count($groupedOrders) / $recordsPerPage);
+					if ($recordsPerPage != null) {
+						$totalPages = ceil(count($groupedOrders) / $recordsPerPage);
+						// Hiển thị nút "prev" nếu không phải trang đầu tiên
+						if ($page > 1) {
+							echo "<a href='index.php?page=" . ($page - 1) . "' class='btn btn-primary'>Prev</a>";
+						}
 
-					// Hiển thị nút "prev" nếu không phải trang đầu tiên
-					if ($page > 1) {
-						echo "<a href='index.php?page=" . ($page - 1) . "' class='btn btn-primary'>Prev</a>";
-					}
+						// Hiển thị các trang
+						for ($i = 1; $i <= $totalPages; $i++) {
+							$activeClass = ($i == $page) ? 'active' : '';
+							echo "<a href='index.php?page=$i' class='btn btn-primary $activeClass'>$i</a>";
+						}
 
-					// Hiển thị các trang
-					for ($i = 1; $i <= $totalPages; $i++) {
-						$activeClass = ($i == $page) ? 'active' : '';
-						echo "<a href='index.php?page=$i' class='btn btn-primary $activeClass'>$i</a>";
-					}
-
-					// Hiển thị nút "next" nếu không phải trang cuối cùng
-					if ($page < $totalPages) {
-						echo "<a href='index.php?page=" . ($page + 1) . "' class='btn btn-primary'>Next</a>";
+						// Hiển thị nút "next" nếu không phải trang cuối cùng
+						if ($page < $totalPages) {
+							echo "<a href='index.php?page=" . ($page + 1) . "' class='btn btn-primary'>Next</a>";
+						}
 					}
 					?>
 				</div>
