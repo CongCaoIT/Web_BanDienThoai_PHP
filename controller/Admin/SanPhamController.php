@@ -214,7 +214,7 @@ class SanPhamAdmin
 
     public function updateGiaSanPham($mapn)
     {
-        $query = "UPDATE sanpham, chitietphieunhap SET sanpham.DonGia = (chitietphieunhap.DonGiaNhap * 1.5) WHERE sanpham.MaSP = chitietphieunhap.MaSP AND chitietphieunhap.MaPN = ?";
+        $query = "UPDATE sanpham, chitietphieunhap, phieunhap SET sanpham.DonGia = (chitietphieunhap.DonGiaNhap * 1.5),  sanpham.NgayCapNhat = phieunhap.NgayNhap WHERE sanpham.MaSP = chitietphieunhap.MaSP AND chitietphieunhap.MaPN = phieunhap.MaPN AND chitietphieunhap.MaPN = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $mapn);

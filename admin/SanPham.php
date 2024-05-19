@@ -172,9 +172,10 @@ $mauclass = new MauAdmin();
 												echo number_format($sp->getDonGia(), 0, ',', '.') . '₫';
 											}
 											?>
+											<br>
+											<a href="themPN.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm phiếu nhập</a>
 										</td>
 										<td style="color: red;">
-
 											<?php
 											if ($sp->getDonGia() == null) {
 											?>
@@ -190,7 +191,8 @@ $mauclass = new MauAdmin();
 											<?php
 											}
 											?>
-
+											<br>
+											<a href="themPN.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm phiếu nhập</a>
 										</td>
 										<td>
 											<?php
