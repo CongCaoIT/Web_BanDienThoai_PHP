@@ -1,6 +1,5 @@
 <?php
-include('../admin/inc/header.php');
-include('../admin/inc/sidebar.php');
+include('../admin/include_lib.php');
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $dh = new SanPhamAdmin();

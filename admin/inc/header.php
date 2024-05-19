@@ -1,5 +1,4 @@
 <?php
-include('../admin/include_lib.php');
 Session::checkSession();
 ?>
 <!DOCTYPE html>

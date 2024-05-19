@@ -60,7 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				}
 				?>
 			</div>
-			<form action="#" method="post">
+			<form method="post">
 				<input type="text" class="ggg" placeholder="Username" name="adminUser" required="">
 				<input type="password" class="ggg" placeholder="Password" name="adminPass" required="">
 				<span><input type="checkbox" />Nhớ Mật Khẩu</span>

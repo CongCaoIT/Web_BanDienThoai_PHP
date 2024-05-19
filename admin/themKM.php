@@ -1,6 +1,6 @@
 <?php
-include('../admin/inc/header.php');
-include('../admin/inc/sidebar.php');
+
+include('../admin/include_lib.php');
 $sp = new SanPhamAdmin();
 if (isset($_POST['btn_Luu'])) {
     $masp = $_GET['ma'];

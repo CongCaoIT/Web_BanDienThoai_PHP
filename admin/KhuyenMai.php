@@ -1,6 +1,6 @@
 <?php
-include('../admin/inc/header.php');
-include('../admin/inc/sidebar.php');
+
+include('../admin/include_lib.php');
 
 // Đảm bảo rằng biến $page được khởi tạo
 $page = isset($_GET['page']) ? $_GET['page'] : 1;

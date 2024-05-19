@@ -9,19 +9,19 @@
                         <span>Thống Kê</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="index.php">Thống kê</a></li>
-                        <li><a href="chartjs.php">Biểu đồ</a></li>
+                        <li><a href="../admin/index.php">Thống kê</a></li>
+                        <li><a href="../admin/chartjs.php">Biểu đồ</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="DuyetDonHang.php">
+                    <a href="../admin/DuyetDonHang.php">
                         <i class="fa fa-book"></i>
                         <span>Duyệt Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="KhuyenMai.php">
+                    <a href="../admin/KhuyenMai.php">
                         <i class="fa fa-bullhorn"></i>
                         <span>Khuyến Mãi </span>
                     </a>
@@ -32,8 +32,8 @@
                         <span>Nhập Kho</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="NhapKho.php">Danh sách phiếu nhập</a></li>
-                        <li><a href="ThemPhieuNhap.php">Phiếu nhập kho</a></li>
+                        <li><a href="../admin/NhapKho.php">Danh sách phiếu nhập</a></li>
+                        <li><a href="../admin/ThemPhieuNhap.php">Phiếu nhập kho</a></li>
                     </ul>
                 </li>
 
@@ -43,11 +43,11 @@
                         <span>Sản Phẩm</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="SanPham.php?ma=1">Iphone</a></li>
-                        <li><a href="SanPham.php?ma=2">Oppo</a></li>
-                        <li><a href="SanPham.php?ma=3">Vivo</a></li>
-                        <li><a href="SanPham.php?ma=4">Samsung</a></li>
-                        <li><a href="SanPham.php?ma=5">Xiaomi</a></li>
+                        <li><a href="../admin/SanPham.php?ma=1">Iphone</a></li>
+                        <li><a href="../admin/SanPham.php?ma=2">Oppo</a></li>
+                        <li><a href="../admin/SanPham.php?ma=3">Vivo</a></li>
+                        <li><a href="../admin/SanPham.php?ma=4">Samsung</a></li>
+                        <li><a href="../admin/SanPham.php?ma=5">Xiaomi</a></li>
                     </ul>
                 </li>
 
@@ -57,15 +57,15 @@
                         <span>Chi Tiết Sản Phẩm</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="ChiTietSanPham.php?ma=1">Iphone</a></li>
-                        <li><a href="ChiTietSanPham.php?ma=2">Oppo</a></li>
-                        <li><a href="ChiTietSanPham.php?ma=3">Vivo</a></li>
-                        <li><a href="ChiTietSanPham.php?ma=4">Samsung</a></li>
-                        <li><a href="ChiTietSanPham.php?ma=5">Xiaomi</a></li>
+                        <li><a href="../admin/ChiTietSanPham.php?ma=1">Iphone</a></li>
+                        <li><a href="../admin/ChiTietSanPham.php?ma=2">Oppo</a></li>
+                        <li><a href="../admin/ChiTietSanPham.php?ma=3">Vivo</a></li>
+                        <li><a href="../admin/ChiTietSanPham.php?ma=4">Samsung</a></li>
+                        <li><a href="../admin/ChiTietSanPham.php?ma=5">Xiaomi</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="PhanQuyenPage.php">
+                    <a href="../admin/PhanQuyenPage.php">
                         <i class="fa fa-bullhorn"></i>
                         <span>Phân Quyền</span>
                     </a>
