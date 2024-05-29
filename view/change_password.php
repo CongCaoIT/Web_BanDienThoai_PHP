@@ -6,13 +6,15 @@ session_start();
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['old-password'], $_POST['new-password'], $_POST['confirm-password'], $_POST['memberId'])) {
+        $maHoa = new MaHoa();
         $oldPassword = $_POST['old-password'];
+        $hasPass = $maHoa->ma_hoa_md5($oldPassword);
         $newPassword = $_POST['new-password'];
         $confirmPassword = $_POST['confirm-password'];
         $memberId = $_POST['memberId'];
 
         $member = Member::getMemberByMemberId($memberId);
-        if ($member->getMatKhau() === $oldPassword) {
+        if ($member->getMatKhau() === $hasPass) {
             if (strlen($newPassword) >= 6) {
                 if ($newPassword === $confirmPassword) {
                     Member::updatePasswordByMemberId($memberId, $newPassword);

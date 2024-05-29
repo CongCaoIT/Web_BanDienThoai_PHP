@@ -63,7 +63,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<form method="post">
 				<input type="text" class="ggg" placeholder="Username" name="adminUser" required="">
 				<input type="password" class="ggg" placeholder="Password" name="adminPass" required="">
-				<span><input type="checkbox" />Nhớ Mật Khẩu</span>
+				<span><input type="checkbox" /> Nhớ Mật Khẩu</span>
 				<h6><a href="ForgotPass.php">Quên Mật Khẩu?</a></h6>
 				<div class="clearfix"></div>
 				<input type="submit" value="Sign In" name="login">

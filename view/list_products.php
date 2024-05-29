@@ -46,7 +46,7 @@
                     }
 
                     // Số lượng sản phẩm hiển thị trên mỗi trang
-                    $itemsPerPage = 3;
+                    $itemsPerPage = 6;
 
                     // Tính toán số lượng trang
                     $totalItems = count($products);

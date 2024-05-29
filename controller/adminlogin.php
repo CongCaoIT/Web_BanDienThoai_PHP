@@ -1,4 +1,3 @@
-
 <?php
 include '../model/lib/session.php';
 include '../model/lib/database.php';
@@ -59,6 +58,34 @@ class adminlogin
             }
         }
     }
-}
-?>
 
+    public function getMemberByMemberId($memberId)
+    {
+        $member = null;
+        $query = "SELECT * FROM thanhvien WHERE MaTV = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $memberId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $member = new ThanhVien($row);
+        }
+
+        return $member;
+    }
+
+    public function updatePasswordByMemberId($memberId, $password)
+    {
+        $maHoa = new MaHoa();
+        $hasPass = $maHoa->ma_hoa_md5($password);
+
+        $query = "UPDATE thanhvien SET MatKhau = ? WHERE MaTV = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $hasPass, $memberId);
+        $result = $stmt->execute();
+
+        return $result;
+    }
+}

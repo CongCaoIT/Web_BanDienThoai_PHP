@@ -197,9 +197,12 @@ $mauclass = new MauAdmin();
 											<?php
 											if ($phantramkhuyenmai != null && date('Y-m-d') >= $ngayBatDau && date('Y-m-d') <= $ngayKetThuc) {
 												echo $phantramkhuyenmai . "%";
+											?>
+												<a href="themKM.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm khuyến mãi</a>
+											<?php
 											} else {
 											?>
-												<a href="themKM.php?ma=<?php echo $sp->getMaSP(); ?>">Chương trình khuyến mãi</a>
+												<a href="themKM.php?ma=<?php echo $sp->getMaSP(); ?>">Thêm khuyến mãi</a>
 											<?php
 											}
 											?>

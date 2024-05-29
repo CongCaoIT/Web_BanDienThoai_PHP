@@ -72,7 +72,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 										<td><?php echo $pn->getSoLuongNhapMau1(); ?></td>
 										<td><?php echo $pn->mau2->getTenMau(); ?></td>
 										<td><?php echo $pn->getSoLuongNhapMau2(); ?></td>
-										<td><?php echo $pn->getDonGiaNhap(); ?></td>
+										<td><?php echo number_format($pn->getDonGiaNhap(), 0, '.', ','); ?> VND</td>
 									</tr>
 							<?php
 								}
@@ -91,18 +91,18 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						$totalPages = ceil(count($dsPhieuNhap) / $recordsPerPage);
 
 						if ($page > 1) {
-							echo "<a href='NhapKho.php?page=" . ($page - 1) . "' class='btn btn-primary'>Prev</a>";
+							echo "<a href='NhapKho.php?page=" . ($page - 1) . "' class='btn btn-primary mr-1'><<</a>";
 						}
 
 						// Hiển thị các trang
 						for ($i = 1; $i <= $totalPages; $i++) {
 							$activeClass = ($i == $page) ? 'active' : '';
-							echo "<a href='NhapKho.php?page=$i' class='btn btn-primary $activeClass'>$i</a>";
+							echo "<a href='NhapKho.php?page=$i' class='btn btn-primary $activeClass mr-1'>$i</a>";
 						}
 
 						// Hiển thị nút "next" nếu không phải trang cuối cùng
 						if ($page < $totalPages) {
-							echo "<a href='NhapKho.php?page=" . ($page + 1) . "' class='btn btn-primary'>Next</a>";
+							echo "<a href='NhapKho.php?page=" . ($page + 1) . "' class='btn btn-primary'>>></a>";
 						}
 						?>
 					</div>

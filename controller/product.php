@@ -32,7 +32,7 @@ class Product
     public static function getProductsByCategory($categoryId)
     {
         $products = array();
-        $sql = "SELECT * FROM sanpham WHERE MaLoaiSP = ?";
+        $sql = "SELECT * FROM sanpham WHERE MaLoaiSP = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId]);
         if (count($result) > 0) {

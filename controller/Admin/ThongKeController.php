@@ -14,7 +14,7 @@ class ThongKeAdmin
         DATE_FORMAT(ddh.NgayDatHang, '%Y-%m-%d') AS Ngay,
         COUNT(ddh.MaDDH) AS TongSoDonDatHang,
         SUM(ctdh.SoLuong * ctdh.DonGia) AS TongDoanhThu,
-        SUM(ctdh.SoLuong * (ctdh.DonGia - ctpn.DonGiaNhap)) AS TienLoi,
+        SUM(ctdh.SoLuong * (ctdh.DonGia - ctpn_hientai.DonGiaNhap)) AS TienLoi,
         SUM(CASE WHEN ddh.DaThanhToan = 1 THEN 1 ELSE 0 END) AS TongSoDonDaThanhToan
     FROM 
         DONDATHANG ddh
@@ -23,13 +23,19 @@ class ThongKeAdmin
     JOIN (
         SELECT 
             MaSP,
-            MAX(MaCTPN) AS MaCTPN,
             DonGiaNhap
         FROM 
-            CHITIETPHIEUNHAP
-        GROUP BY 
-            MaSP
-    ) ctpn ON ctdh.MaSP = ctpn.MaSP
+            CHITIETPHIEUNHAP ctpn1
+        WHERE 
+            ctpn1.MaCTPN = (
+                SELECT 
+                    MAX(ctpn2.MaCTPN)
+                FROM 
+                    CHITIETPHIEUNHAP ctpn2
+                WHERE 
+                    ctpn2.MaSP = ctpn1.MaSP
+            )
+    ) ctpn_hientai ON ctdh.MaSP = ctpn_hientai.MaSP
     GROUP BY 
         DATE_FORMAT(ddh.NgayDatHang, '%Y-%m-%d')
     ORDER BY 

@@ -1,0 +1,130 @@
+<?php
+include '../controller/adminlogin.php';
+session_start();
+$class = new adminlogin();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $memberId = Session::get('adminId');
+    if (isset($_POST['old-password'], $_POST['new-password'], $_POST['confirm-password'], $memberId)) {
+        $maHoa = new MaHoa();
+        $oldPassword = $_POST['old-password'];
+        $hasPass = $maHoa->ma_hoa_md5($oldPassword);
+        $newPassword = $_POST['new-password'];
+        $confirmPassword = $_POST['confirm-password'];
+        $memberId = Session::get('adminId');
+
+        $member = $class->getMemberByMemberId($memberId);
+        if ($member->getMatKhau() === $hasPass) {
+            if (strlen($newPassword) >= 6) {
+                if ($newPassword === $confirmPassword) {
+                    $class->updatePasswordByMemberId($memberId, $newPassword);
+?>
+                    <script>
+                        window.location.href = "index.php";
+                    </script>
+                <?php
+                } else {
+                ?>
+                    <script>
+                        alert("Mật khẩu xác nhận không khớp! Vui lòng nhập lại.");
+                    </script>
+                <?php
+                }
+            } else {
+                ?>
+                <script>
+                    alert("Mật khẩu phải từ 6 ký tự trở lên! Vui lòng nhập lại.");
+                </script>
+            <?php
+            }
+        } else {
+            ?>
+            <script>
+                alert("Mật khẩu hiện tại không chính xác! Vui lòng nhập lại.");
+            </script>
+<?php
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+
+<head>
+    <title>Forgot Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- //bootstrap-css -->
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <!-- font CSS -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <script src="js/jquery2.0.3.min.js"></script>
+</head>
+
+<body>
+    <div class="reg-w3">
+        <div class="w3layouts-main">
+            <h2>Đổi mật khẩu</h2>
+            <?php if (isset($pass_check)) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $pass_check; ?>
+                </div>
+            <?php } ?>
+            <form method="post">
+                <input type="password" class="ggg" name="old-password" placeholder="Mật khẩu hiện tại" required="">
+                <input type="password" class="ggg" name="new-password" placeholder="Mật khẩu mới" required="">
+                <input type="password" class="ggg" name="confirm-password" placeholder="Nhập lại mật mới" required="">
+
+                <div class="clearfix"></div>
+                <input type="submit" value="Đổi mật khẩu" name="ForgotPass">
+            </form>
+        </div>
+    </div>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+    <script src="js/jquery.scrollTo.js"></script>
+    <script>
+        function generateCode() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var code = '';
+            for (var i = 0; i < 5; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('verificationCode').value = code;
+        }
+
+        function refreshCode() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var code = '';
+            for (var i = 0; i < 5; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('verificationCode').value = code;
+        }
+
+        window.onload = generateCode;
+    </script>
+</body>
+
+</html>

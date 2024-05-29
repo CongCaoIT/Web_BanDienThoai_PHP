@@ -12,6 +12,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+
     <script type="application/x-javascript">
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
@@ -249,8 +251,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <li><a href="#"><i class=" fa fa-suitcase"></i>Hồ sơ</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
-                            <li><a href="../admin/logout.php"><i class="fa fa-key"></i> Đăng xuất</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i>Cài đặt</a></li>
+                            <li><a href="../admin/doimatkhau.php"><i class="fa fa-lock"></i> Đổi mật khẩu</a></li>
+                            <li><a href="../admin/logout.php"><i class="fa fa-key"></i>Đăng xuất</a></li>
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
