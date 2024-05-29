@@ -12,25 +12,67 @@ class phieuNhapController
 
     public function showDSPhieuNhap()
     {
-        $DSPNResult = $this->db->callProcedure('GetDSPhieuNhap');
+        // Thực hiện truy vấn SQL
+        $query = "SELECT 
+        pn.MaPN,
+        ncc.TenNCC,
+        sp.TenSP,
+        pn.NgayNhap,
+        mau1.TenMau AS TenMau1,
+        ctpn.SoLuongNhapMau1,
+        mau2.TenMau AS TenMau2,
+        ctpn.SoLuongNhapMau2,
+        ctpn.DonGiaNhap
+    FROM 
+        PHIEUNHAP pn
+    JOIN 
+        NHACUNGCAP ncc ON pn.MaNCC = ncc.MaNCC
+    JOIN 
+        CHITIETPHIEUNHAP ctpn ON pn.MaPN = ctpn.MaPN
+    JOIN 
+        SANPHAM sp ON ctpn.MaSP = sp.MaSP
+    LEFT JOIN 
+        MAU mau1 ON ctpn.MaMau1 = mau1.MaMau
+    LEFT JOIN 
+        MAU mau2 ON ctpn.MaMau2 = mau2.MaMau;";
+
+        $result = $this->db->select($query);
 
         $DSPNResults = array();
 
-        if ($DSPNResult) {
-            while ($row = $DSPNResult->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $dh = new ChiTietPhieuNhap();
                 $dh->setMaPN($row['MaPN']);
                 $dh->ncc->setTenNCC($row['TenNCC']);
                 $dh->sp->setTenSP($row['TenSP']);
                 $dh->pn->setNgayNhap($row['NgayNhap']);
+
+                // Tạo đối tượng Mau1 và gán tên màu
+                $mau1 = new Mau();
+                $mau1->setTenMau($row['TenMau1']);
+                $dh->mau1 = $mau1;
+
+                // Gán số lượng màu 1
+                $dh->setSoLuongNhapMau1($row['SoLuongNhapMau1']);
+
+                // Tạo đối tượng Mau2 và gán tên màu
+                $mau2 = new Mau();
+                $mau2->setTenMau($row['TenMau2']);
+                $dh->mau2 = $mau2;
+
+                // Gán số lượng màu 2
+                $dh->setSoLuongNhapMau2($row['SoLuongNhapMau2']);
+
+                // Gán đơn giá nhập
                 $dh->setDonGiaNhap($row['DonGiaNhap']);
-                $dh->setSoLuongNhap($row['SoLuongNhap1']);
 
                 $DSPNResults[] = $dh;
             }
         } else {
             echo "Chưa có phiếu nhập";
         }
+
         return $DSPNResults;
     }
 

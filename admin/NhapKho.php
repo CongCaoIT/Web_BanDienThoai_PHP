@@ -34,8 +34,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 						</div>
 					</div>
 				</div>
-
-
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -44,8 +42,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 								<th>Tên nhà cung cấp</th>
 								<th>Tên sản phẩm</th>
 								<th>Ngày nhập</th>
-								<th>Đơn giá nhập</th>
+								<th>Tên màu 1</th>
 								<th>Số lượng nhập</th>
+								<th>Tên màu 2</th>
+								<th>Số lượng nhập</th>
+								<th>Đơn giá nhập</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -54,7 +55,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 							$dh = new phieuNhapController();
 							$dsPhieuNhap = $dh->showDSPhieuNhap();
 
-							$recordsPerPage = 2;
+							$recordsPerPage = 9;
 							if (!empty($dsPhieuNhap)) {
 								$startIndex = ($page - 1) * $recordsPerPage;
 								$endIndex = min($startIndex + $recordsPerPage - 1, count($dsPhieuNhap) - 1);
@@ -67,8 +68,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 										<td><?php echo $pn->ncc->getTenNCC(); ?></td>
 										<td><?php echo $pn->sp->getTenSP(); ?></td>
 										<td><?php echo $pn->pn->getNgayNhap(); ?></td>
+										<td><?php echo $pn->mau1->getTenMau(); ?></td>
+										<td><?php echo $pn->getSoLuongNhapMau1(); ?></td>
+										<td><?php echo $pn->mau2->getTenMau(); ?></td>
+										<td><?php echo $pn->getSoLuongNhapMau2(); ?></td>
 										<td><?php echo $pn->getDonGiaNhap(); ?></td>
-										<td><?php echo $pn->getSoLuongNhap(); ?></td>
 									</tr>
 							<?php
 								}
