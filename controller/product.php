@@ -117,7 +117,7 @@ class Product
     public static function getProductsByCategoryAndRam($categoryId, $ram)
     {
         $products = array();
-        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND RAM = ?";
+        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND RAM = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId, $ram]);
         if (count($result) > 0) {
@@ -131,7 +131,7 @@ class Product
     public static function getProductsByCategoryAndStorage($categoryId, $storage)
     {
         $products = array();
-        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND DUNGLUONG = ?";
+        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND DUNGLUONG = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId, $storage]);
         if (count($result) > 0) {
@@ -145,7 +145,7 @@ class Product
     public static function getProductsByCategoryAndScanningFrequency($categoryId, $scanningFrequency)
     {
         $products = array();
-        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND TANSOQUET = ?";
+        $sql = "SELECT sanpham.* FROM sanpham, chitietsanpham WHERE sanpham.MaSP = chitietsanpham.MaSP AND MaLoaiSP = ? AND TANSOQUET = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId, $scanningFrequency]);
         if (count($result) > 0) {
@@ -159,7 +159,7 @@ class Product
     public static function getProductsByCategoryAndColor($categoryId, $colorId)
     {
         $products = array();
-        $sql = "SELECT sanpham.* FROM sanpham, sanpham_mau WHERE MaLoaiSP = ? AND sanpham.MaSP = sanpham_mau.MaSP AND sanpham_mau.MaMau = ?";
+        $sql = "SELECT sanpham.* FROM sanpham, sanpham_mau WHERE MaLoaiSP = ? AND sanpham.MaSP = sanpham_mau.MaSP AND sanpham_mau.MaMau = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId, $colorId]);
         if (count($result) > 0) {
@@ -173,7 +173,7 @@ class Product
     public static function getProductById($productId)
     {
         $product = null;
-        $sql = "SELECT * FROM sanpham WHERE MaSP = ?";
+        $sql = "SELECT * FROM sanpham WHERE MaSP = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetch($sql, [$productId]);
         if ($result != false) {
@@ -184,7 +184,7 @@ class Product
 
     public static function getCountOfProductByColor($productId, $colorId)
     {
-        $sql = "SELECT SoLuongTon FROM sanpham_mau WHERE MaSP = ? AND MaMau = ?";
+        $sql = "SELECT SoLuongTon FROM sanpham_mau WHERE MaSP = ? AND MaMau = ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetch($sql, [$productId, $colorId]);
         if ($result != false) {
@@ -196,7 +196,7 @@ class Product
     public static function getProductsByKeyword($keyword)
     {
         $products = array();
-        $sql = "SELECT * FROM sanpham WHERE TenSP LIKE ?";
+        $sql = "SELECT * FROM sanpham WHERE TenSP LIKE ? AND DaXoa = 0";
         $db = new Database();
         $result = $db->fetchAll($sql, ['%' . $keyword . '%']);
         if (count($result) > 0) {
