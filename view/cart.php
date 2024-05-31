@@ -225,7 +225,7 @@ session_start();
                                     <td style="display: flex; justify-content: center; align-items: center;" class="col-md-2">
                                         <a href="./single.php?productId=<?php echo $cartDetail->getMaSP() ?>"><img style="width: 50%" src="./images/products/<?php echo $product->getHinhAnh() ?>"></a>
                                     </td>
-                                    <td style="display: flex; justify-content: center; align-items: center;" class="col-md-3"><?php echo $product->getTenSP() . ' - ' . $color->getTenMau() ?></td>
+                                    <td style="display: flex; justify-content: flex-start; align-items: center;" class="col-md-3"><?php echo $product->getTenSP() . ' - ' . $color->getTenMau() ?></td>
                                     <td style="display: flex; justify-content: center; align-items: center;" class="col-md-2"><?php echo number_format($cartDetail->getDonGia(), 0, ',', '.') ?> ₫</td>
                                     <td style="display: flex; justify-content: center; align-items: center;" class="col-md-1">
                                         <select style="width: 70%; height: 50%; text-align: center" id="cart_count" name="cars" onchange="updateCartItem(this, <?php echo $cart->getMaGioHang() ?>, <?php echo $cartDetail->getMaSP() ?>, <?php echo $cartDetail->getMaMau() ?>)">
