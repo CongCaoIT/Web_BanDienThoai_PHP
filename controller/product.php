@@ -4,7 +4,7 @@ class Product
     public static function getRandomProductsByCategory($categoryId)
     {
         $products = array();
-        $sql = "SELECT * FROM sanpham WHERE MaLoaiSP = ? ORDER BY RAND() LIMIT 6";
+        $sql = "SELECT * FROM sanpham WHERE MaLoaiSP = ? AND DaXoa = 0 ORDER BY RAND() LIMIT 6";
         $db = new Database();
         $result = $db->fetchAll($sql, [$categoryId]);
         if (count($result) > 0) {
@@ -18,7 +18,7 @@ class Product
     public static function getRandomProducts()
     {
         $products = array();
-        $sql = "SELECT * FROM sanpham ORDER BY RAND() LIMIT 12";
+        $sql = "SELECT * FROM sanpham WHERE DaXoa = 0 ORDER BY RAND() LIMIT 12";
         $db = new Database();
         $result = $db->fetchAll($sql);
         if (count($result) > 0) {
